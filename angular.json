@@ -71,6 +71,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "open": true,
+            "port": 3030
+          },
           "configurations": {
             "production": {
               "browserTarget": "lista-canciones-para-tocar:build:production"
