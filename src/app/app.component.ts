@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { testPasteText } from './test';
+import { getListaCanciones } from 'src/functions/getListaCanciones';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = testPasteText;
-    console.log(this._getContentWithoutTitle())
+    console.log(this._getContentWithoutTitle());
+    console.log(getListaCanciones());
   }
 
   public async onPaste(): Promise<void> {
