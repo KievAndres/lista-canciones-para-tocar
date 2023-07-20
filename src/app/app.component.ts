@@ -22,11 +22,12 @@ export class AppComponent {
     // this.pastedText = testPasteText;
     this.identifiedSongList = [];
     this.songList = getListaCanciones();
-    this._identifySongList();
+    // this._identifySongList();
   }
 
   public async onPaste(): Promise<void> {
     this.pastedText = await navigator.clipboard.readText();
+    this._identifySongList();
   }
 
   private _identifySongList(): void {
@@ -56,13 +57,5 @@ export class AppComponent {
         });
       }
     }
-  }
-
-  private _getContentWithoutTitle(): string {
-    let newContent = this.pastedText;
-    if (newContent.includes(':')) {
-      newContent = newContent.split(':')[1];
-    }
-    return newContent.trim();
   }
 }
