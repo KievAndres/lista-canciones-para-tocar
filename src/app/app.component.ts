@@ -19,10 +19,10 @@ export class AppComponent {
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
-    this.pastedText = testPasteText;
+    // this.pastedText = testPasteText;
     this.identifiedSongList = [];
     this.songList = getListaCanciones();
-    this._identifySongList();
+    // this._identifySongList();
   }
 
   public async onPaste(): Promise<void> {

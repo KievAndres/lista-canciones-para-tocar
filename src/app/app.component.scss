@@ -12,7 +12,7 @@
     justify-content: space-between;
 
     .title-list {
-      font-size: 2em;
+      font-size: clamp(1em, 6vw, 3em);
       margin-left: .5em;
     }
 
