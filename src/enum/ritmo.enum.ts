@@ -8,5 +8,7 @@ export enum Ritmo {
   CUMBIA = 'Cumbia',
   HEBREA = 'Hebrea',
   SAYA = 'Saya',
-  SAYA_AFRO = 'Saya Afro'
+  SAYA_AFRO = 'Saya Afro',
+  ZAPATEO = 'Zapateo',
+  MORENADA = 'Morenada'
 }
