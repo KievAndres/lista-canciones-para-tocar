@@ -27,7 +27,8 @@ export class AppComponent {
 
   public async onPaste(): Promise<void> {
     this.pastedText = await navigator.clipboard.readText();
-    this.pastedText = this.pastedText.replace(/\n/g, '');
+    this.pastedText = this.pastedText.replace(/\n/g, ' ');
+    this.identifiedSongList = [];
     this._identifySongList();
   }
 
