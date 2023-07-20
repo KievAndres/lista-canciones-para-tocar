@@ -3,29 +3,67 @@
 .song-list-container {
   font-family: 'Open Sans', sans-serif;
   position: relative;
-  display: flex;
-  flex-wrap: wrap;
 
-  .song-item {
-    width: 100%;
-    text-align: center;
-    font-size: 3em;
+  .song-list-header {
+    height: 4em;
+    background: #56eba9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title-list {
+      font-size: 2em;
+      margin-left: .5em;
+    }
+
+    .paste-button {
+      color: #fff;
+      background: #673AB7;
+      border: none;
+      border-radius: 0.3em;
+      padding: 0.8em 1.8em;
+      font-size: 1em;
+      margin-right: .5em;
+    }
   }
 
-  .title-list {
-    width: 100%;
-    text-align: center;
-  }
+  .song-list {
+    display: flex;
+    flex-wrap: wrap;
+    height: calc(100vh - 4em);
+    overflow: auto;
 
-  .paste-button {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    color: #fff;
-    background: #673AB7;
-    border: none;
-    border-radius: 0.3em;
-    padding: 0.3em 1em;
-    font-size: 1em;
+    .song-item {
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid #cacaca;
+      display: grid;
+      grid-template-columns: 4fr 1fr 4fr;
+      grid-template-areas:
+        "title        title title"
+        "alternative  .     rythm";
+  
+      &:last-child {
+        border-bottom: none;
+      }
+  
+      &-title {
+        grid-area: title;
+        font-size: clamp(1em, 10vw, 3em);
+        font-weight: bold;
+      }
+      &-alternative-title {
+        grid-area: alternative;
+        font-size: clamp(10px, 6vw, 2em);
+        text-align: start;
+        margin-left: .5em;
+      }
+      &-rythm {
+        grid-area: rythm;
+        font-size: clamp(10px, 6vw, 2em);
+        text-align: end;
+        margin-right: .5em;
+      }
+    }
   }
 }

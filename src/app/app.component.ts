@@ -19,10 +19,10 @@ export class AppComponent {
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
-    // this.pastedText = testPasteText;
+    this.pastedText = testPasteText;
     this.identifiedSongList = [];
     this.songList = getListaCanciones();
-    // this._identifySongList();
+    this._identifySongList();
   }
 
   public async onPaste(): Promise<void> {
@@ -48,7 +48,7 @@ export class AppComponent {
             // const pastedTextSubstring = this.pastedText.substring(startPointer + 1);
             let cumulativeIndex = 0;
             for (let i = 0; i < songNameArray.length; i++) {
-              if (songNameArray[i].toLowerCase() === pastedTextSubstringArray[i].toLowerCase()) {
+              if (songNameArray[i].toLowerCase() === pastedTextSubstringArray[i]?.toLowerCase() ?? '') {
                 cumulativeIndex++;
               }
             }

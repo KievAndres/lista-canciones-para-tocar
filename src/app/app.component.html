@@ -1,7 +1,13 @@
 <div class="song-list-container">
-  <h1 class="title-list">{{titleList}}</h1>
-  <span class="song-item" *ngFor="let idetifiedSong of identifiedSongList">
-    {{idetifiedSong.nombre[0]}}
-  </span>
-  <button class="paste-button" (click)="onPaste()">PASTE</button>
+  <section class="song-list-header">
+    <span class="title-list">{{titleList}}</span>
+    <button class="paste-button" (click)="onPaste()">PASTE</button>
+  </section>
+  <div class="song-list">
+    <div class="song-item" *ngFor="let idetifiedSong of identifiedSongList">
+      <span class="song-item-title">{{idetifiedSong.nombre[0]}}</span>
+      <span class="song-item-alternative-title">{{idetifiedSong.nombre[1]}}</span>
+      <span class="song-item-rythm">{{idetifiedSong.ritmo[0]}}</span>
+    </div>
+  </div>
 </div>
