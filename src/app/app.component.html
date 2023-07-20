@@ -1,5 +1,7 @@
-<div>
-  Paste here!
-  <span>{{pastedText}}</span>
+<div class="song-list-container">
+  <h1 class="title-list">{{titleList}}</h1>
+  <span class="song-item" *ngFor="let idetifiedSong of identifiedSongList">
+    {{idetifiedSong.nombre[0]}}
+  </span>
+  <button class="paste-button" (click)="onPaste()">PASTE</button>
 </div>
-<button (click)="onPaste()">PASTE</button>

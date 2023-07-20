@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100&family=Open+Sans:wght@300&display=swap');
+
+.song-list-container {
+  font-family: 'Open Sans', sans-serif;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+
+  .song-item {
+    width: 100%;
+    text-align: center;
+    font-size: 3em;
+  }
+
+  .title-list {
+    width: 100%;
+    text-align: center;
+  }
+
+  .paste-button {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    background: #673AB7;
+    border: none;
+    border-radius: 0.3em;
+    padding: 0.3em 1em;
+    font-size: 1em;
+  }
+}
