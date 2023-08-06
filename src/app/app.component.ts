@@ -18,8 +18,7 @@ export class AppComponent {
   public songList: Cancion[];
   public selectedSong: number;
   
-  // private readonly _timeInterval: number = 1000 * 60 * 5;
-  private readonly _timeInterval: number = 1000;
+  private readonly _timeInterval: number = 1000 * 60 * 5;
 
   constructor() {
     this.titleList = 'Músicas para hoy';
