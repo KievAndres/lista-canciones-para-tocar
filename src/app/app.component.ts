@@ -16,15 +16,23 @@ export class AppComponent {
   public titleList: string;
   public identifiedSongList: Cancion[];
   public songList: Cancion[];
+  public selectedSong: number;
   
-  private readonly _timeInterval: number = 1000 * 60 * 5;
+  // private readonly _timeInterval: number = 1000 * 60 * 5;
+  private readonly _timeInterval: number = 1000;
 
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
+    this.selectedSong = 0;
     // this.pastedText = testPasteText;
+    const identifiedSongListLocalStorage = JSON.parse(localStorage.getItem('identifiedSongList') ?? '""');
     this.identifiedSongList = [];
     this.songList = getListaCanciones();
+    if (identifiedSongListLocalStorage) {
+      this.identifiedSongList = identifiedSongListLocalStorage;
+      this._animateSelectedSong();
+    }
     // this._identifyLineText();
   }
 
@@ -32,14 +40,10 @@ export class AppComponent {
     this.pastedText = await navigator.clipboard.readText();
     this.identifiedSongList = [];
     this._identifyLineText();
+    localStorage.setItem('identifiedSongList', JSON.stringify(this.identifiedSongList));
     if (this.identifiedSongList.length > 0) {
-      let i = 1;
-      setInterval(() => {
-        if (i < this.identifiedSongList.length) {
-          document.getElementById(`song-item-${i}`)?.scrollIntoView();
-          i++;
-        }
-      }, this._timeInterval)
+      this.selectedSong = 0;
+      this._animateSelectedSong();
     }
   }
 
@@ -81,5 +85,14 @@ export class AppComponent {
     cleanText = cleanText.toLowerCase();
     cleanText = cleanText.trim();
     return cleanText;
-  } 
+  }
+
+  private _animateSelectedSong(): void {
+    setInterval(() => {
+      if (this.selectedSong < this.identifiedSongList.length) {
+        this.selectedSong++;
+        document.getElementById(`song-item-${this.selectedSong}`)?.scrollIntoView();
+      }
+    }, this._timeInterval);
+  }
 }

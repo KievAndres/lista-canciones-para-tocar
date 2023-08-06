@@ -49,6 +49,7 @@
   
       &:last-child {
         border-bottom: none;
+        padding-bottom: 2em;
       }
   
       &-title {
@@ -67,6 +68,10 @@
         font-size: clamp(10px, 6vw, 2em);
         text-align: end;
         margin-right: .5em;
+      }
+
+      &-selected {
+        background-color: #ffff9a;
       }
     }
   }
