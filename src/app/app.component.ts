@@ -16,6 +16,8 @@ export class AppComponent {
   public titleList: string;
   public identifiedSongList: Cancion[];
   public songList: Cancion[];
+  
+  private readonly _timeInterval: number = 1000 * 60 * 5;
 
   constructor() {
     this.titleList = 'Músicas para hoy';
@@ -30,6 +32,15 @@ export class AppComponent {
     this.pastedText = await navigator.clipboard.readText();
     this.identifiedSongList = [];
     this._identifyLineText();
+    if (this.identifiedSongList.length > 0) {
+      let i = 1;
+      setInterval(() => {
+        if (i < this.identifiedSongList.length) {
+          document.getElementById(`song-item-${i}`)?.scrollIntoView();
+          i++;
+        }
+      }, this._timeInterval)
+    }
   }
 
   private _identifyLineText(): void {

@@ -4,7 +4,7 @@
     <button class="paste-button" (click)="onPaste()">PEGAR</button>
   </section>
   <div class="song-list">
-    <div class="song-item" *ngFor="let idetifiedSong of identifiedSongList">
+    <div class="song-item" [id]="'song-item-' + i" *ngFor="let idetifiedSong of identifiedSongList; index as i">
       <span class="song-item-title">{{idetifiedSong.nombre[0]}}</span>
       <span class="song-item-alternative-title">{{idetifiedSong.nombre[1]}}</span>
       <span class="song-item-rythm">{{idetifiedSong.ritmo[0]}}</span>

@@ -31,7 +31,10 @@
     display: flex;
     flex-wrap: wrap;
     height: calc(100vh - 4em);
+    height: calc(100dvh - 4em);
     overflow: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
 
     .song-item {
       width: 100%;
@@ -42,6 +45,7 @@
       grid-template-areas:
         "title        title title"
         "alternative  .     rythm";
+      scroll-snap-align: start;
   
       &:last-child {
         border-bottom: none;
