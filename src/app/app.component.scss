@@ -46,6 +46,7 @@
         "title        title title"
         "alternative  .     rythm";
       scroll-snap-align: start;
+      user-select: none;
   
       &:last-child {
         border-bottom: none;
