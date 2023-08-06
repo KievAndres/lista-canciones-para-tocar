@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { testPasteText } from './test';
 import { getListaCanciones } from 'src/functions/getListaCanciones';
 import { Cancion } from 'src/interfaces/cancion.interface';
+import { titleList } from '../constants/title.constant';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'lista-canciones-para-tocar';
@@ -19,45 +20,55 @@ export class AppComponent {
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
-    // this.pastedText = testPasteText;
+    this.pastedText = testPasteText;
     this.identifiedSongList = [];
     this.songList = getListaCanciones();
-    // this._identifySongList();
+    this._identifyLineText();
   }
 
   public async onPaste(): Promise<void> {
     this.pastedText = await navigator.clipboard.readText();
-    this.pastedText = this.pastedText.replace(/\n/g, ' ');
     this.identifiedSongList = [];
-    this._identifySongList();
+    this._identifyLineText();
   }
 
-  private _identifySongList(): void {
-    const listaPalabras = this.pastedText.split(' ');
-    for (let startPointer = 0; startPointer < listaPalabras.length - 1; startPointer++) {
-      const songListByRythm = this.songList.filter(song => {
-        const rythmList = song.ritmo.map(rythm => rythm.toLowerCase());
-        return rythmList.includes(listaPalabras[startPointer].toLowerCase())
-      });
-      if (songListByRythm.length > 0) {
-        songListByRythm.forEach(song => {
-          song.nombre.forEach(songName => {
-            const songNameArray = songName.split(' ');
-            let pastedTextSubstringArray = this.pastedText.split(' ');
-            pastedTextSubstringArray.splice(0, startPointer + 1);
-            // const pastedTextSubstring = this.pastedText.substring(startPointer + 1);
-            let cumulativeIndex = 0;
-            for (let i = 0; i < songNameArray.length; i++) {
-              if (songNameArray[i].toLowerCase() === pastedTextSubstringArray[i]?.toLowerCase() ?? '') {
-                cumulativeIndex++;
-              }
-            }
-            if (cumulativeIndex === songNameArray.length) {
-              this.identifiedSongList.push(song)
-            }
-          })
-        });
+  private _identifyLineText(): void {
+    const lineTextList = this.pastedText.split('\n');
+    lineTextList.forEach((lineText, index) => {
+      if (index > 0) {
+        this._identifySongList(lineText);
+      } else {
+        // Possible title
+        if (!titleList.includes(lineText)) {
+          this._identifySongList(lineText);
+        }
       }
-    }
+    });
   }
+
+  private _identifySongList(lineText: string): void {
+    let rythm, songName;
+    this.songList.forEach((song) => {
+      const possibleRythmWordList = lineText.split(' ');
+      const possibleSongNameList: string[] = [];
+      while (possibleRythmWordList.length > 0) {
+        rythm = this._cleanText(possibleRythmWordList.join(' '));
+        songName = this._cleanText(possibleSongNameList.join(' '));
+        const songRythmList = song.ritmo.map(item => this._cleanText(item));
+        const songNameList = song.nombre.map(item => this._cleanText(item));
+        if (songRythmList.includes(rythm) && songNameList.includes(songName)) {
+          this.identifiedSongList.push(song);
+          break;
+        }
+        possibleSongNameList.unshift(possibleRythmWordList.pop() ?? '');
+      }
+    });
+  }
+
+  private _cleanText(text: string): string {
+    let cleanText = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    cleanText = cleanText.toLowerCase();
+    cleanText = cleanText.trim();
+    return cleanText;
+  } 
 }

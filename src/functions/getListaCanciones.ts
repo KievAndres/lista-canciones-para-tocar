@@ -50,6 +50,14 @@ export function getListaCanciones(): Cancion[] {
       ritmo: [HUAYÑO],
     },
     {
+      nombre: ['Me aferro'],
+      ritmo: [HUAYÑO],
+    },
+    {
+      nombre: ['Siempre estás'],
+      ritmo: [HUAYÑO],
+    },
+    {
       nombre: ['Estoy pisando', 'Hebrea 1'],
       ritmo: [HEBREA],
     },
@@ -90,7 +98,11 @@ export function getListaCanciones(): Cancion[] {
       ritmo: [ZAPATEO]
     },
     {
-      nombre: ['Eres el amado'],
+      nombre: ['Eres el amado', 'Morenada 2'],
+      ritmo: [MORENADA]
+    },
+    {
+      nombre: ['Me gozo', 'Morenada 1'],
       ritmo: [MORENADA]
     }
   ];

@@ -1,1 +1,11 @@
-export const testPasteText = 'Músicas para hoy: Zankalada Mi Dios Caporal poderoso Salay anhelo más de tu amor Salay amor verdadero Suri si te tengo a ti Huayño eterno es tu amor Huayño Aleluya Cumbia eres la esencia Hebrea nadie como tú';
+export const testPasteText =
+`Músicas para hoy:
+Zapateo eres mi escudo
+Salay anhelo más de tu amor 
+Salay amor verdadero 
+Saya afro tu Padre 
+Caporal poderoso 
+Huayño eterno es tu amor 
+Huayño me aferro 
+Morenada me gozo 
+Hebrea estoy pisando`;
