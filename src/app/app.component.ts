@@ -23,11 +23,16 @@ export class AppComponent {
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
-    this.selectedSong = 0;
     // this.pastedText = testPasteText;
     const identifiedSongListLocalStorage = JSON.parse(localStorage.getItem('identifiedSongList') ?? '""');
+    const selectedSongLocalStorage = JSON.parse(localStorage.getItem('selectedSong') ?? '0');
     this.identifiedSongList = [];
+    this.selectedSong = 0;
     this.songList = getListaCanciones();
+    if (selectedSongLocalStorage) {
+      this.selectedSong = selectedSongLocalStorage;
+      this._goToSelectedSong();
+    }
     if (identifiedSongListLocalStorage) {
       this.identifiedSongList = identifiedSongListLocalStorage;
       this._animateSelectedSong();
@@ -38,10 +43,11 @@ export class AppComponent {
   public async onPaste(): Promise<void> {
     this.pastedText = await navigator.clipboard.readText();
     this.identifiedSongList = [];
+    this.selectedSong = 0;
     this._identifyLineText();
-    localStorage.setItem('identifiedSongList', JSON.stringify(this.identifiedSongList));
     if (this.identifiedSongList.length > 0) {
-      this.selectedSong = 0;
+      localStorage.setItem('identifiedSongList', JSON.stringify(this.identifiedSongList));
+      localStorage.setItem('selectedSong', JSON.stringify(this.selectedSong));
       this._animateSelectedSong();
     }
   }
@@ -90,8 +96,13 @@ export class AppComponent {
     setInterval(() => {
       if (this.selectedSong < this.identifiedSongList.length) {
         this.selectedSong++;
-        document.getElementById(`song-item-${this.selectedSong}`)?.scrollIntoView();
+        localStorage.setItem('selectedSong', JSON.stringify(this.selectedSong));
+        this._goToSelectedSong();
       }
     }, this._timeInterval);
+  }
+
+  private _goToSelectedSong(): void {
+    document.getElementById(`song-item-${this.selectedSong}`)?.scrollIntoView();
   }
 }
