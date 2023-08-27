@@ -1,9 +1,9 @@
-import { Ritmo } from "src/enum/ritmo.enum";
+import { Rythm } from "src/enum/rythm.enum";
 
 export function getColorByRythm(rythm: string): string {
   let color = '#cacaca';
   switch(rythm) {
-    case Ritmo.ZANKALADA:
+    case Rythm.ZANKALADA:
       color = '#d5ec06'
       break;
   }

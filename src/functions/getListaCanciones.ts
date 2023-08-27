@@ -1,7 +1,7 @@
-import { Ritmo } from 'src/enum/ritmo.enum';
-import { Cancion } from 'src/interfaces/cancion.interface';
+import { Rythm } from 'src/enum/rythm.enum';
+import { Song } from 'src/interfaces/song.interface';
 
-export function getListaCanciones(): Cancion[] {
+export function getListaCanciones(): Song[] {
   const {
     ZANKALADA,
     CAPORAL,
@@ -15,95 +15,95 @@ export function getListaCanciones(): Cancion[] {
     SAYA_AFRO,
     ZAPATEO,
     MORENADA
-  } = Ritmo;
+  } = Rythm;
   return [
     {
-      nombre: ['Mi Dios'],
-      ritmo: [ZANKALADA],
+      name: ['Mi Dios'],
+      rythm: [ZANKALADA],
     },
     {
-      nombre: ['Grande y glorioso', 'Salay 3'],
-      ritmo: [SALAY],
+      name: ['Grande y glorioso', 'Salay 3'],
+      rythm: [SALAY],
     },
     {
-      nombre: ['Anhelo mas de tu amor', 'Salay 4'],
-      ritmo: [SALAY],
+      name: ['Anhelo mas de tu amor', 'Salay 4'],
+      rythm: [SALAY],
     },
     {
-      nombre: ['Amor verdadero', 'Salay 5'],
-      ritmo: [SALAY],
+      name: ['Amor verdadero', 'Salay 5'],
+      rythm: [SALAY],
     },
     {
-      nombre: ['Si te tengo a ti'],
-      ritmo: [SURI],
+      name: ['Si te tengo a ti'],
+      rythm: [SURI],
     },
     {
-      nombre: ['Poderoso'],
-      ritmo: [CAPORAL],
+      name: ['Poderoso'],
+      rythm: [CAPORAL],
     },
     {
-      nombre: ['Eterno es tu amor'],
-      ritmo: [HUAYÑO, HUALAYNO],
+      name: ['Eterno es tu amor'],
+      rythm: [HUAYÑO, HUALAYNO],
     },
     {
-      nombre: ['Aleluya'],
-      ritmo: [HUAYÑO],
+      name: ['Aleluya'],
+      rythm: [HUAYÑO],
     },
     {
-      nombre: ['Me aferro'],
-      ritmo: [HUAYÑO],
+      name: ['Me aferro'],
+      rythm: [HUAYÑO],
     },
     {
-      nombre: ['Siempre estás'],
-      ritmo: [HUAYÑO],
+      name: ['Siempre estás'],
+      rythm: [HUAYÑO],
     },
     {
-      nombre: ['Estoy pisando', 'Hebrea 1'],
-      ritmo: [HEBREA],
+      name: ['Estoy pisando', 'Hebrea 1'],
+      rythm: [HEBREA],
     },
     {
-      nombre: ['Nadie como tú', 'Nadie como tu', 'Hebrea 2'],
-      ritmo: [HEBREA],
+      name: ['Nadie como tú', 'Nadie como tu', 'Hebrea 2'],
+      rythm: [HEBREA],
     },
     {
-      nombre: ['Tu padre'],
-      ritmo: [SAYA_AFRO, SAYA],
+      name: ['Tu padre'],
+      rythm: [SAYA_AFRO, SAYA],
     },
     {
-      nombre: ['Tu amor', 'Cumbia 1', 'Cumbia Isra 1'],
-      ritmo: [CUMBIA]
+      name: ['Tu amor', 'Cumbia 1', 'Cumbia Isra 1'],
+      rythm: [CUMBIA]
     },
     {
-      nombre: ['Me llevas', 'Me lleva', 'Cumbia 2', 'Cumbia Isra 2'],
-      ritmo: [CUMBIA]
+      name: ['Me llevas', 'Me lleva', 'Cumbia 2', 'Cumbia Isra 2'],
+      rythm: [CUMBIA]
     },
     {
-      nombre: ['Tengo al padre', 'Cumbia 3', 'Cumbia Isra 3'],
-      ritmo: [CUMBIA]
+      name: ['Tengo al padre', 'Cumbia 3', 'Cumbia Isra 3'],
+      rythm: [CUMBIA]
     },
     {
-      nombre: ['Eres la esencia', 'Cumbia 4', 'Cumbia Isra 4'],
-      ritmo: [CUMBIA],
+      name: ['Eres la esencia', 'Cumbia 4', 'Cumbia Isra 4'],
+      rythm: [CUMBIA],
     },
     {
-      nombre: ['En ti mi Dios'],
-      ritmo: [HUAYÑO]
+      name: ['En ti mi Dios'],
+      rythm: [HUAYÑO]
     },
     {
-      nombre: ['Eres mi escudo', 'Zapateo 1'],
-      ritmo: [ZAPATEO]
+      name: ['Eres mi escudo', 'Zapateo 1'],
+      rythm: [ZAPATEO]
     },
     {
-      nombre: ['Con lazos', 'Zapateo 2'],
-      ritmo: [ZAPATEO]
+      name: ['Con lazos', 'Zapateo 2'],
+      rythm: [ZAPATEO]
     },
     {
-      nombre: ['Eres el amado', 'Morenada 2'],
-      ritmo: [MORENADA]
+      name: ['Eres el amado', 'Morenada 2'],
+      rythm: [MORENADA]
     },
     {
-      nombre: ['Me gozo', 'Morenada 1'],
-      ritmo: [MORENADA]
+      name: ['Me gozo', 'Morenada 1'],
+      rythm: [MORENADA]
     }
   ];
 }

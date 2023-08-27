@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { testPasteText } from './test';
 import { getListaCanciones } from 'src/functions/getListaCanciones';
-import { Cancion } from 'src/interfaces/cancion.interface';
+import { Song } from 'src/interfaces/song.interface';
 import { titleList } from '../constants/title.constant';
+import { getCurrentSongTheme } from '../functions/get-current-song-theme';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,8 @@ export class AppComponent {
 
   public pastedText: string;
   public titleList: string;
-  public identifiedSongList: Cancion[];
-  public songList: Cancion[];
+  public identifiedSongList: Song[];
+  public songList: Song[];
   public selectedSong: number;
   
   private readonly _timeInterval: number = 1000 * 60 * 6.5;
@@ -23,7 +24,7 @@ export class AppComponent {
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
-    // this.pastedText = testPasteText;
+    this.pastedText = testPasteText;
     const identifiedSongListLocalStorage = JSON.parse(localStorage.getItem('identifiedSongList') ?? '""');
     const selectedSongLocalStorage = JSON.parse(localStorage.getItem('selectedSong') ?? '0');
     this.identifiedSongList = [];
@@ -37,7 +38,7 @@ export class AppComponent {
       this.identifiedSongList = identifiedSongListLocalStorage;
       this._animateSelectedSong();
     }
-    // this._identifyLineText();
+    this._identifyLineText();
   }
 
   public async onPaste(): Promise<void> {
@@ -68,14 +69,15 @@ export class AppComponent {
 
   private _identifySongList(lineText: string): void {
     let rythm, songName;
-    this.songList.forEach((song) => {
+    this.songList.forEach((song: Song, index: number) => {
       const possibleRythmWordList = lineText.split(' ');
       const possibleSongNameList: string[] = [];
       while (possibleRythmWordList.length > 0) {
         rythm = this._cleanText(possibleRythmWordList.join(' '));
         songName = this._cleanText(possibleSongNameList.join(' '));
-        const songRythmList = song.ritmo.map(item => this._cleanText(item));
-        const songNameList = song.nombre.map(item => this._cleanText(item));
+        const songRythmList = song.rythm.map(item => this._cleanText(item));
+        const songNameList = song.name.map(item => this._cleanText(item));
+        song.theme = getCurrentSongTheme(index);
         if (songRythmList.includes(rythm) && songNameList.includes(songName)) {
           this.identifiedSongList.push(song);
           break;
