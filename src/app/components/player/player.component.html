@@ -1,10 +1,17 @@
 <div class="player-container">
   <section class="song previous-song">previous song</section>
-  <section class="song current-song">
+  <section
+    class="song current-song"
+    [style.background]="songTheme?.generalBackground"
+    [style.color]="songTheme?.generalTextColor">
     <div class="glass-container">
-      <span class="glass-container-title">Anhelo mas de tu amor</span>
-      <span class="glass-container-alternative-title">Alternative title</span>
-      <span class="glass-container-rythm">🎵 Rythm</span>
+      <span class="glass-container-title">{{currentSong.name[0]}}</span>
+      <span class="glass-container-alternative-title">{{currentSong.name[1]}}</span>
+      <div
+        class="glass-container-rythm"
+        [style.background]="songTheme?.rythmBackground"
+        [style.color]="songTheme?.rythmTextColor"
+        >🎵 <span>{{currentSong.rythm}}</span></div>
     </div>
   </section>
   <section class="song next-song">next song</section>

@@ -45,7 +45,7 @@ export class AppComponent {
       this.identifiedSongList = identifiedSongListLocalStorage;
       this._animateSelectedSong();
     }
-    // this._identifyLineText();
+    this._identifyLineText();
   }
 
   public async onPaste(): Promise<void> {
@@ -95,6 +95,7 @@ export class AppComponent {
         songName = this._cleanText(possibleSongNameList.join(' '));
         const songRythmList = song.rythm.map((item) => this._cleanText(item));
         const songNameList = song.name.map((item) => this._cleanText(item));
+        song.theme = getCurrentSongTheme(index);
         if (songRythmList.includes(rythm) && songNameList.includes(songName)) {
           this.identifiedSongList.push(song);
           isIdentifiedSong = true;
