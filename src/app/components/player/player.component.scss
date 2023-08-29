@@ -80,19 +80,19 @@
 
       &-title {
         // grid-area: title;
-        font-size: clamp(1em, 17vw, 3em);
+        font-size: clamp(1em, 17vw, 7em);
         font-weight: bold;
         text-align: center;
         line-height: 1em;
       }
 
       &-alternative-title {
-        font-size: clamp(10px, 12vw, 2em);
+        font-size: clamp(10px, 12vw, 5em);
         line-height: 1em;
       }
 
       &-rythm {
-        font-size: clamp(1em, 5vw, 1.3em);
+        font-size: clamp(1em, 5vw, 2em);
         color: #fff;
         position: absolute;
         bottom: 0.2em;
