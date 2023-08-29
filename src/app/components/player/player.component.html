@@ -1,10 +1,16 @@
 <div class="player-container">
-  <section class="song previous-song">previous song</section>
+  <section class="previous-song-container">
+    <div *ngIf="previousSong" class="previous-next-song previous-song">
+      <i class="previous-next-song-chevron bx bxs-chevrons-left"></i>
+      <span class="previous-next-song-title">{{previousSong.name[0]}}</span>
+      <span class="previous-next-song-rythm">{{previousSong.rythm[0]}}</span>
+    </div>
+  </section>
   <section
     class="song current-song"
     [style.background]="songTheme?.generalBackground"
     [style.color]="songTheme?.generalTextColor">
-    <div class="glass-container">
+    <div *ngIf="currentSong" class="glass-container">
       <span class="glass-container-title">{{currentSong.name[0]}}</span>
       <span class="glass-container-alternative-title">{{currentSong.name[1]}}</span>
       <div
@@ -14,6 +20,12 @@
         >🎵 <span>{{currentSong.rythm}}</span></div>
     </div>
   </section>
-  <section class="song next-song">next song</section>
+  <section class="next-song-container">
+    <div *ngIf="nextSong" class="previous-next-song next-song">
+      <i class="previous-next-song-chevron bx bxs-chevrons-right"></i>
+      <span class="previous-next-song-title">{{nextSong.name[0]}}</span>
+      <span class="previous-next-song-rythm">{{nextSong.rythm[0]}}</span>
+    </div>
+  </section>
   <section class="controls"></section>
 </div>
