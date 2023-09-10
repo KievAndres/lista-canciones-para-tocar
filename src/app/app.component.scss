@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100&family=Open+Sans:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100&family=Open+Sans:wght@300&display=swap");
 
 .song-list-container {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   position: relative;
 
   .song-list-header {
@@ -13,17 +13,17 @@
 
     .title-list {
       font-size: clamp(1em, 6vw, 3em);
-      margin-left: .5em;
+      margin-left: 0.5em;
     }
 
     .paste-button {
       color: #fff;
-      background: #673AB7;
+      background: #673ab7;
       border: none;
       border-radius: 0.3em;
       padding: 0.8em 1.8em;
       font-size: 1em;
-      margin-right: .5em;
+      margin-right: 0.5em;
     }
   }
 
@@ -47,12 +47,12 @@
         "alternative  .     rythm";
       scroll-snap-align: start;
       user-select: none;
-  
+
       &:last-child {
         border-bottom: none;
         padding-bottom: 2em;
       }
-  
+
       &-title {
         grid-area: title;
         font-size: clamp(1em, 10vw, 3em);
@@ -62,13 +62,24 @@
         grid-area: alternative;
         font-size: clamp(10px, 6vw, 2em);
         text-align: start;
-        margin-left: .5em;
+        margin-left: 0.5em;
+      }
+      .new-song {
+        background: rgb(238, 174, 202);
+        background: radial-gradient(
+          circle,
+          rgba(238, 174, 202, 1) 0%,
+          rgba(148, 187, 233, 1) 100%
+        );
+        padding: 0 0.4em;
+        border-radius: 0.3em;
+        font-weight: bold;
       }
       &-rythm {
         grid-area: rythm;
         font-size: clamp(10px, 6vw, 2em);
         text-align: end;
-        margin-right: .5em;
+        margin-right: 0.5em;
       }
 
       &-selected {

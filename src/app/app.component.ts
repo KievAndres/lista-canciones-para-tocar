@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { testPasteText } from './test';
 import { getListaCanciones } from 'src/functions/getListaCanciones';
 import { Song } from 'src/interfaces/cancion.interface';
-import { titleList } from '../constants/title.constant';
+import { NUEVA_ALABANZA, titleList } from '../constants/title.constant';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,8 @@ export class AppComponent {
   public identifiedSongList: Song[];
   public songList: Song[];
   public selectedSong: number;
+
+  public readonly NUEVA_ALABANZA = NUEVA_ALABANZA;
   
   private readonly _timeInterval: number = 1000 * 60 * 6.5;
 
@@ -60,7 +62,8 @@ export class AppComponent {
       } else {
         // Possible title
         const cleanedLineText = this._cleanText(lineText);
-        if (!titleList.includes(cleanedLineText)) {
+        const cleanedTitleList: string[] = titleList.map(title => this._cleanText(title));
+        if (!cleanedTitleList.includes(cleanedLineText)) {
           this._identifySongList(cleanedLineText);
         }
       }
@@ -68,8 +71,12 @@ export class AppComponent {
   }
 
   private _identifySongList(lineText: string): void {
+    if (!this._isValidSong(lineText)) {
+      return;
+    }
     let rythm, songName;
-    this.songList.forEach((song) => {
+    let isIdentifiedSong = false;
+    for (let song of this.songList) {
       const possibleRythmWordList = lineText.split(' ');
       const possibleSongNameList: string[] = [];
       while (possibleRythmWordList.length > 0) {
@@ -79,11 +86,20 @@ export class AppComponent {
         const songNameList = song.name.map(item => this._cleanText(item));
         if (songRythmList.includes(rythm) && songNameList.includes(songName)) {
           this.identifiedSongList.push(song);
+          isIdentifiedSong = true;
           break;
         }
         possibleSongNameList.unshift(possibleRythmWordList.pop() ?? '');
       }
-    });
+      if (isIdentifiedSong) {
+        break;
+      }
+    }
+    if (!isIdentifiedSong) {
+      // Song not identified is added to list anyways
+      const temporarySong = this._getTemporarySong(lineText);
+      this.identifiedSongList.push(temporarySong);
+    }
   }
 
   private _cleanText(text: string): string {
@@ -109,5 +125,16 @@ export class AppComponent {
 
   private _goToSelectedSong(): void {
     document.getElementById(`song-item-${this.selectedSong}`)?.scrollIntoView();
+  }
+
+  private _getTemporarySong(text: string): Song {
+    return {
+      name: [text, NUEVA_ALABANZA],
+      rythm: []
+    }
+  }
+
+  private _isValidSong(text: string): boolean {
+    return text.replace(/\n/g, '').trim().length > 0;
   }
 }

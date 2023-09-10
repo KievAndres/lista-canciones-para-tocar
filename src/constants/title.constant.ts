@@ -1,6 +1,7 @@
 export const titleList = [
-  'Musicas para hoy:',
   'Músicas para hoy:',
-  'Musica para hoy:',
-  'Música para hoy:'
+  'Músicas para hoy',
+  'Música para hoy:',
+  'Música para hoy',
 ];
+export const NUEVA_ALABANZA = 'Nueva alabanza';
