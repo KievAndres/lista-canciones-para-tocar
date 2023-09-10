@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { testPasteText } from './test';
 import { getListaCanciones } from 'src/functions/getListaCanciones';
-import { Cancion } from 'src/interfaces/cancion.interface';
+import { Song } from 'src/interfaces/cancion.interface';
 import { titleList } from '../constants/title.constant';
 
 @Component({
@@ -14,8 +14,8 @@ export class AppComponent {
 
   public pastedText: string;
   public titleList: string;
-  public identifiedSongList: Cancion[];
-  public songList: Cancion[];
+  public identifiedSongList: Song[];
+  public songList: Song[];
   public selectedSong: number;
   
   private readonly _timeInterval: number = 1000 * 60 * 6.5;
@@ -59,8 +59,9 @@ export class AppComponent {
         this._identifySongList(lineText);
       } else {
         // Possible title
-        if (!titleList.includes(lineText)) {
-          this._identifySongList(lineText);
+        const cleanedLineText = this._removeSpecialCharacters(lineText);
+        if (!titleList.includes(cleanedLineText)) {
+          this._identifySongList(cleanedLineText);
         }
       }
     });
@@ -72,10 +73,10 @@ export class AppComponent {
       const possibleRythmWordList = lineText.split(' ');
       const possibleSongNameList: string[] = [];
       while (possibleRythmWordList.length > 0) {
-        rythm = this._cleanText(possibleRythmWordList.join(' '));
-        songName = this._cleanText(possibleSongNameList.join(' '));
-        const songRythmList = song.ritmo.map(item => this._cleanText(item));
-        const songNameList = song.nombre.map(item => this._cleanText(item));
+        rythm = this._removeSpecialCharacters(possibleRythmWordList.join(' '));
+        songName = this._removeSpecialCharacters(possibleSongNameList.join(' '));
+        const songRythmList = song.rythm.map(item => this._removeSpecialCharacters(item));
+        const songNameList = song.name.map(item => this._removeSpecialCharacters(item));
         if (songRythmList.includes(rythm) && songNameList.includes(songName)) {
           this.identifiedSongList.push(song);
           break;
@@ -85,7 +86,7 @@ export class AppComponent {
     });
   }
 
-  private _cleanText(text: string): string {
+  private _removeSpecialCharacters(text: string): string {
     let cleanText = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     cleanText = cleanText.toLowerCase();
     cleanText = cleanText.trim();

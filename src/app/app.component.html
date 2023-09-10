@@ -5,9 +5,9 @@
   </section>
   <div class="song-list">
     <div class="song-item" [ngClass]="{'song-item-selected': selectedSong === i}" [id]="'song-item-' + i" *ngFor="let idetifiedSong of identifiedSongList; index as i">
-      <span class="song-item-title">{{idetifiedSong.nombre[0]}}</span>
-      <span class="song-item-alternative-title">{{idetifiedSong.nombre[1]}}</span>
-      <span class="song-item-rythm">{{idetifiedSong.ritmo[0]}}</span>
+      <span class="song-item-title">{{idetifiedSong.name[0]}}</span>
+      <span class="song-item-alternative-title">{{idetifiedSong.name[1]}}</span>
+      <span class="song-item-rythm">{{idetifiedSong.rythm[0]}}</span>
     </div>
   </div>
 </div>

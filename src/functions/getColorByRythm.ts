@@ -1,4 +1,4 @@
-import { Ritmo } from "src/enum/ritmo.enum";
+import { Ritmo } from "src/enum/rythm.enum";
 
 export function getColorByRythm(rythm: string): string {
   let color = '#cacaca';

@@ -1,4 +1,4 @@
-export enum Ritmo {
+export enum Rythm {
   ZANKALADA = 'Zankalada',
   CAPORAL = 'Caporal',
   SALAY = 'Salay',

@@ -1,4 +1,4 @@
-export interface Cancion {
-  nombre: string [],
-  ritmo: string[]
+export interface Song {
+  name: string [],
+  rythm: string[]
 }
