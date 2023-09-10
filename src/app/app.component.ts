@@ -59,7 +59,7 @@ export class AppComponent {
         this._identifySongList(lineText);
       } else {
         // Possible title
-        const cleanedLineText = this._removeSpecialCharacters(lineText);
+        const cleanedLineText = this._cleanText(lineText);
         if (!titleList.includes(cleanedLineText)) {
           this._identifySongList(cleanedLineText);
         }
@@ -73,10 +73,10 @@ export class AppComponent {
       const possibleRythmWordList = lineText.split(' ');
       const possibleSongNameList: string[] = [];
       while (possibleRythmWordList.length > 0) {
-        rythm = this._removeSpecialCharacters(possibleRythmWordList.join(' '));
-        songName = this._removeSpecialCharacters(possibleSongNameList.join(' '));
-        const songRythmList = song.rythm.map(item => this._removeSpecialCharacters(item));
-        const songNameList = song.name.map(item => this._removeSpecialCharacters(item));
+        rythm = this._cleanText(possibleRythmWordList.join(' '));
+        songName = this._cleanText(possibleSongNameList.join(' '));
+        const songRythmList = song.rythm.map(item => this._cleanText(item));
+        const songNameList = song.name.map(item => this._cleanText(item));
         if (songRythmList.includes(rythm) && songNameList.includes(songName)) {
           this.identifiedSongList.push(song);
           break;
@@ -86,11 +86,15 @@ export class AppComponent {
     });
   }
 
-  private _removeSpecialCharacters(text: string): string {
-    let cleanText = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  private _cleanText(text: string): string {
+    let cleanText = this._removeSpecialCharacters(text);
     cleanText = cleanText.toLowerCase();
     cleanText = cleanText.trim();
     return cleanText;
+  }
+
+  private _removeSpecialCharacters(text: string): string {
+    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   }
 
   private _animateSelectedSong(): void {
