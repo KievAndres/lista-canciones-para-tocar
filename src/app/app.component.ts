@@ -28,24 +28,24 @@ export class AppComponent {
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
-    // this.pastedText = testPasteText;
-    const identifiedSongListLocalStorage = JSON.parse(
-      localStorage.getItem('identifiedSongList') ?? '""'
-    );
-    const selectedSongLocalStorage = JSON.parse(
-      localStorage.getItem('selectedSong') ?? '0'
-    );
+    this.pastedText = testPasteText;
+    // const identifiedSongListLocalStorage = JSON.parse(
+    //   localStorage.getItem('identifiedSongList') ?? '""'
+    // );
+    // const selectedSongLocalStorage = JSON.parse(
+    //   localStorage.getItem('selectedSong') ?? '0'
+    // );
     this.identifiedSongList = [];
     this.selectedSong = 0;
     this.songList = getSongList();
-    if (selectedSongLocalStorage) {
-      this.selectedSong = selectedSongLocalStorage;
-      this._goToSelectedSong();
-    }
-    if (identifiedSongListLocalStorage) {
-      this.identifiedSongList = identifiedSongListLocalStorage;
-      this._animateSelectedSong();
-    }
+    // if (selectedSongLocalStorage) {
+    //   this.selectedSong = selectedSongLocalStorage;
+    //   this._goToSelectedSong();
+    // }
+    // if (identifiedSongListLocalStorage) {
+    //   this.identifiedSongList = identifiedSongListLocalStorage;
+    //   this._animateSelectedSong();
+    // }
     this._identifyLineText();
   }
 
@@ -97,7 +97,6 @@ export class AppComponent {
         songName = this._cleanText(possibleSongNameList.join(' '));
         const songRythmList = song.rythm.map((item) => this._cleanText(item));
         const songNameList = song.name.map((item) => this._cleanText(item));
-        song.theme = getCurrentSongTheme(i);
         if (songRythmList.includes(rythm) && songNameList.includes(songName)) {
           this.identifiedSongList.push(song);
           isIdentifiedSong = true;
@@ -114,6 +113,8 @@ export class AppComponent {
       const temporarySong = this._getTemporarySong(lineText);
       this.identifiedSongList.push(temporarySong);
     }
+
+    this._buildSongThemes();
   }
 
   private _cleanText(text: string): string {
@@ -147,5 +148,12 @@ export class AppComponent {
 
   private _isValidSong(text: string): boolean {
     return text.replace(/\n/g, '').trim().length > 0;
+  }
+
+  private _buildSongThemes(): void {
+    this.identifiedSongList = this.identifiedSongList.map((song, index) => {
+      song.theme = getCurrentSongTheme(index);
+      return song;
+    })
   }
 }
