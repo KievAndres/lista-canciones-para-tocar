@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { testPasteText } from './test';
-import { getListaCanciones } from 'src/functions/getListaCanciones';
+import { getSongList } from 'src/functions/get-song-list';
 import { Song } from 'src/interfaces/cancion.interface';
-import { NUEVA_ALABANZA, titleList } from '../constants/title.constant';
+import { NUEVA_ALABANZA, titleList } from 'src/constants/song-identifier.constant';
+import { removeSpecialCharacters } from '../functions/remove-special-characters.function';
+import { removePunctuationMarks } from '../functions/remove-punctuation-marks.function';
 
 @Component({
   selector: 'app-root',
@@ -19,18 +21,22 @@ export class AppComponent {
   public selectedSong: number;
 
   public readonly NUEVA_ALABANZA = NUEVA_ALABANZA;
-  
+
   private readonly _timeInterval: number = 1000 * 60 * 6.5;
 
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
     // this.pastedText = testPasteText;
-    const identifiedSongListLocalStorage = JSON.parse(localStorage.getItem('identifiedSongList') ?? '""');
-    const selectedSongLocalStorage = JSON.parse(localStorage.getItem('selectedSong') ?? '0');
+    const identifiedSongListLocalStorage = JSON.parse(
+      localStorage.getItem('identifiedSongList') ?? '""'
+    );
+    const selectedSongLocalStorage = JSON.parse(
+      localStorage.getItem('selectedSong') ?? '0'
+    );
     this.identifiedSongList = [];
     this.selectedSong = 0;
-    this.songList = getListaCanciones();
+    this.songList = getSongList();
     if (selectedSongLocalStorage) {
       this.selectedSong = selectedSongLocalStorage;
       this._goToSelectedSong();
@@ -48,7 +54,10 @@ export class AppComponent {
     this.selectedSong = 0;
     this._identifyLineText();
     if (this.identifiedSongList.length > 0) {
-      localStorage.setItem('identifiedSongList', JSON.stringify(this.identifiedSongList));
+      localStorage.setItem(
+        'identifiedSongList',
+        JSON.stringify(this.identifiedSongList)
+      );
       localStorage.setItem('selectedSong', JSON.stringify(this.selectedSong));
       this._animateSelectedSong();
     }
@@ -62,7 +71,9 @@ export class AppComponent {
       } else {
         // Possible title
         const cleanedLineText = this._cleanText(lineText);
-        const cleanedTitleList: string[] = titleList.map(title => this._cleanText(title));
+        const cleanedTitleList: string[] = titleList.map((title) =>
+          this._cleanText(title)
+        );
         if (!cleanedTitleList.includes(cleanedLineText)) {
           this._identifySongList(cleanedLineText);
         }
@@ -82,8 +93,8 @@ export class AppComponent {
       while (possibleRythmWordList.length > 0) {
         rythm = this._cleanText(possibleRythmWordList.join(' '));
         songName = this._cleanText(possibleSongNameList.join(' '));
-        const songRythmList = song.rythm.map(item => this._cleanText(item));
-        const songNameList = song.name.map(item => this._cleanText(item));
+        const songRythmList = song.rythm.map((item) => this._cleanText(item));
+        const songNameList = song.name.map((item) => this._cleanText(item));
         if (songRythmList.includes(rythm) && songNameList.includes(songName)) {
           this.identifiedSongList.push(song);
           isIdentifiedSong = true;
@@ -103,14 +114,11 @@ export class AppComponent {
   }
 
   private _cleanText(text: string): string {
-    let cleanText = this._removeSpecialCharacters(text);
+    let cleanText = removeSpecialCharacters(text);
+    cleanText = removePunctuationMarks(cleanText);
     cleanText = cleanText.toLowerCase();
     cleanText = cleanText.trim();
     return cleanText;
-  }
-
-  private _removeSpecialCharacters(text: string): string {
-    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
   }
 
   private _animateSelectedSong(): void {
@@ -130,8 +138,8 @@ export class AppComponent {
   private _getTemporarySong(text: string): Song {
     return {
       name: [text, NUEVA_ALABANZA],
-      rythm: []
-    }
+      rythm: [],
+    };
   }
 
   private _isValidSong(text: string): boolean {

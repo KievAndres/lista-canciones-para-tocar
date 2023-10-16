@@ -1,7 +1,7 @@
 import { Rythm } from 'src/enum/rythm.enum';
 import { Song } from 'src/interfaces/cancion.interface';
 
-export function getListaCanciones(): Song[] {
+export function getSongList(): Song[] {
   const {
     ZANKALADA,
     CAPORAL,
