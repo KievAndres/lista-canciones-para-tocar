@@ -1,5 +1,5 @@
 import { Rythm } from 'src/enum/rythm.enum';
-import { Song } from 'src/interfaces/cancion.interface';
+import { Song } from 'src/interfaces/song.interface';
 
 export function getSongList(): Song[] {
   const {

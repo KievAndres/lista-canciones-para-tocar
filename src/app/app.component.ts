@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { testPasteText } from './test';
 import { getSongList } from 'src/functions/get-song-list';
-import { Song } from 'src/interfaces/cancion.interface';
 import { NUEVA_ALABANZA, titleList } from 'src/constants/song-identifier.constant';
 import { removeSpecialCharacters } from '../functions/remove-special-characters.function';
 import { removePunctuationMarks } from '../functions/remove-punctuation-marks.function';
+import { Song } from 'src/interfaces/song.interface';
+import { getCurrentSongTheme } from '../functions/get-current-song-theme';
 
 @Component({
   selector: 'app-root',
@@ -87,7 +88,8 @@ export class AppComponent {
     }
     let rythm, songName;
     let isIdentifiedSong = false;
-    for (let song of this.songList) {
+    for (let i = 0; i < this.songList.length; i++) {
+      let song = this.songList[i];
       const possibleRythmWordList = lineText.split(' ');
       const possibleSongNameList: string[] = [];
       while (possibleRythmWordList.length > 0) {
@@ -95,7 +97,7 @@ export class AppComponent {
         songName = this._cleanText(possibleSongNameList.join(' '));
         const songRythmList = song.rythm.map((item) => this._cleanText(item));
         const songNameList = song.name.map((item) => this._cleanText(item));
-        song.theme = getCurrentSongTheme(index);
+        song.theme = getCurrentSongTheme(i);
         if (songRythmList.includes(rythm) && songNameList.includes(songName)) {
           this.identifiedSongList.push(song);
           isIdentifiedSong = true;
