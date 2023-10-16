@@ -1,10 +1,6 @@
 .player-container {
-  background-color: #000;
-  color: #fff;
-  height: 100vh;
-  height: 100dvh;
-  width: 100vw;
-  width: 100dvw;
+  height: 100%;
+  width: 100%;
   display: grid;
 
   .song {
@@ -14,14 +10,12 @@
   }
 
   .previous-song-container {
-    grid-area: previous-song;
     display: flex;
     align-items: center;
     justify-content: start;
   }
 
   .next-song-container {
-    grid-area: next-song;
     display: flex;
     align-items: center;
     justify-content: end;
@@ -61,7 +55,6 @@
   }
 
   .current-song {
-    grid-area: current-song;
     color: #000;
     background: rgb(34, 193, 195);
     background: linear-gradient(
@@ -109,38 +102,5 @@
       }
     }
   }
-
-  .controls {
-    grid-area: controls;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .play-stop-icon {
-      font-size: 8.5em;
-    }
-  }
 }
 
-@media (orientation: landscape) {
-  .player-container {
-    grid-template-rows: 1fr 3fr 1fr;
-    grid-template-columns: 1fr 10em;
-    grid-template-areas:
-      "previous-song  controls"
-      "current-song   controls"
-      "next-song      controls";
-  }
-}
-
-@media (orientation: portrait) {
-  .player-container {
-    grid-template-rows: 1fr 3fr 1fr 10em;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "previous-song"
-      "current-song"
-      "next-song"
-      "controls";
-  }
-}

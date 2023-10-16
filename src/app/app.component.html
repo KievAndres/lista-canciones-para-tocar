@@ -14,8 +14,13 @@
     </div>
   </div>
 </div> -->
-<player
-  [nextSong]="identifiedSongList[6]"
-  [currentSong]="identifiedSongList[6]"
-  [previousSong]="identifiedSongList[4]">
-</player>
+<div class="app-container">
+  <player
+    class="player"
+    [nextSong]="identifiedSongList[6]"
+    [currentSong]="identifiedSongList[6]"
+    [previousSong]="identifiedSongList[4]"
+  >
+  </player>
+  <controls class="controls"></controls>
+</div>

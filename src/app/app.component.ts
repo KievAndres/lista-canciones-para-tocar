@@ -21,8 +21,6 @@ export class AppComponent {
   public songList: Song[];
   public selectedSong: number;
 
-  public readonly NUEVA_ALABANZA = NUEVA_ALABANZA;
-
   private readonly _timeInterval: number = 1000 * 60 * 6.5;
 
   constructor() {

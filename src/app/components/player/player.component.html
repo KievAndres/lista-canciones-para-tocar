@@ -2,41 +2,34 @@
   <section class="previous-song-container">
     <div *ngIf="previousSong" class="previous-next-song previous-song">
       <i class="previous-next-song-chevron bx bxs-chevrons-left"></i>
-      <span class="previous-next-song-title">{{previousSong.name[0]}}</span>
-      <span class="previous-next-song-rythm">{{previousSong.rythm[0]}}</span>
+      <span class="previous-next-song-title">{{ previousSong.name[0] }}</span>
+      <span class="previous-next-song-rythm">{{ previousSong.rythm[0] }}</span>
     </div>
   </section>
   <section
     class="song current-song"
     [style.background]="songTheme?.generalBackground"
-    [style.color]="songTheme?.generalTextColor">
+    [style.color]="songTheme?.generalTextColor"
+  >
     <div *ngIf="currentSong" class="glass-container">
-      <span class="glass-container-title">{{currentSong.name[0]}}</span>
-      <span class="glass-container-alternative-title">{{currentSong.name[1]}}</span>
+      <span class="glass-container-title">{{ currentSong.name[0] }}</span>
+      <span class="glass-container-alternative-title">{{
+        currentSong.name[1]
+      }}</span>
       <div
         class="glass-container-rythm"
         [style.background]="songTheme?.rythmBackground"
         [style.color]="songTheme?.rythmTextColor"
-        >🎵 <span>{{currentSong.rythm}}</span></div>
+      >
+        🎵 <span>{{ currentSong.rythm }}</span>
+      </div>
     </div>
   </section>
   <section class="next-song-container">
     <div *ngIf="nextSong" class="previous-next-song next-song">
       <i class="previous-next-song-chevron bx bxs-chevrons-right"></i>
-      <span class="previous-next-song-title">{{nextSong.name[0]}}</span>
-      <span class="previous-next-song-rythm">{{nextSong.rythm[0]}}</span>
+      <span class="previous-next-song-title">{{ nextSong.name[0] }}</span>
+      <span class="previous-next-song-rythm">{{ nextSong.rythm[0] }}</span>
     </div>
-  </section>
-  <section class="controls">
-    <i
-      class='play-stop-icon bx bx-play-circle'
-      *ngIf="isPlaying"
-      (click)="changeIsPlaying(false)">
-    </i>
-    <i
-      class='play-stop-icon bx bx-stop-circle'
-      *ngIf="!isPlaying"
-      (click)="changeIsPlaying(true)"
-    ></i>
   </section>
 </div>

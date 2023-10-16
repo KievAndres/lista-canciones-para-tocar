@@ -1,0 +1,21 @@
+.controls {
+  height: 100%;
+  width: 100%;
+  grid-area: controls;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (orientation: landscape) {
+  .control-icons {
+    font-size: 8.5em;
+  }
+}
+
+@media (orientation: portrait) {
+  .control-icons {
+    font-size: 6em;
+  }
+}

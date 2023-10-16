@@ -1,0 +1,18 @@
+<section class="controls">
+  <div class="list-view">
+    <i class="control-icons bx bx-list-ul"></i>
+  </div>
+  <div class="play-stop">
+    <i
+      class="control-icons bx bx-play-circle"
+      *ngIf="isPlaying"
+      (click)="changeIsPlaying(false)"
+    >
+    </i>
+    <i
+      class="control-icons bx bx-stop-circle"
+      *ngIf="!isPlaying"
+      (click)="changeIsPlaying(true)"
+    ></i>
+  </div>
+</section>
