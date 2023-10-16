@@ -13,11 +13,20 @@ export class PlayerComponent implements OnChanges {
   @Input() public nextSong?: Song;
 
   public songTheme?: SongTheme;
+  public isPlaying: boolean;
+
+  constructor() {
+    this.isPlaying = false;
+  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.currentSong?.currentValue) {
       const newCurrentSong: Song = changes.currentSong.currentValue;
       this.songTheme = newCurrentSong.theme;
     }
+  }
+
+  public changeIsPlaying(newIsPlaying: boolean): void {
+    this.isPlaying = newIsPlaying;
   }
 }

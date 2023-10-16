@@ -28,24 +28,24 @@ export class AppComponent {
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
-    // this.pastedText = testPasteText;
-    const identifiedSongListLocalStorage = JSON.parse(
-      localStorage.getItem('identifiedSongList') ?? '""'
-    );
-    const selectedSongLocalStorage = JSON.parse(
-      localStorage.getItem('selectedSong') ?? '0'
-    );
+    this.pastedText = testPasteText;
+    // const identifiedSongListLocalStorage = JSON.parse(
+    //   localStorage.getItem('identifiedSongList') ?? '""'
+    // );
+    // const selectedSongLocalStorage = JSON.parse(
+    //   localStorage.getItem('selectedSong') ?? '0'
+    // );
     this.identifiedSongList = [];
     this.selectedSong = 0;
     this.songList = getSongList();
-    if (selectedSongLocalStorage) {
-      this.selectedSong = selectedSongLocalStorage;
-      this._goToSelectedSong();
-    }
-    if (identifiedSongListLocalStorage) {
-      this.identifiedSongList = identifiedSongListLocalStorage;
-      this._animateSelectedSong();
-    }
+    // if (selectedSongLocalStorage) {
+    //   this.selectedSong = selectedSongLocalStorage;
+    //   this._goToSelectedSong();
+    // }
+    // if (identifiedSongListLocalStorage) {
+    //   this.identifiedSongList = identifiedSongListLocalStorage;
+    //   this._animateSelectedSong();
+    // }
     this._identifyLineText();
   }
 
