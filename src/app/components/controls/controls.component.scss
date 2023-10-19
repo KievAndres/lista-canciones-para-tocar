@@ -1,21 +1,52 @@
 .controls {
   height: 100%;
   width: 100%;
-  grid-area: controls;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+  display: grid;
+
+  .control-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .play-stop {
+    grid-area: play-stop;
+  }
+
+  .list-player {
+    grid-area: list-player;
+  }
+
+  .paste {
+    grid-area: paste;
+  }
 }
 
 @media (orientation: landscape) {
-  .control-icons {
-    font-size: 8.5em;
+  .controls {
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      "list-player"
+      "play-stop"
+      "paste";
+  }
+  .play-stop {
+    font-size: 7em;
+  }
+  .secondary-buttons {
+    font-size: 3em;
   }
 }
 
 @media (orientation: portrait) {
-  .control-icons {
-    font-size: 6em;
+  .controls {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: "paste play-stop list-player";
+  }
+  .play-stop {
+    font-size: 8em;
+  }
+  .secondary-buttons {
+    font-size: 4em;
   }
 }

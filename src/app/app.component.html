@@ -16,11 +16,20 @@
 </div> -->
 <div class="app-container">
   <player
-    class="player"
+    class="player-list"
+    *ngIf="currentPlayerListView === playerListView.PLAYER_VIEW"
     [nextSong]="identifiedSongList[6]"
     [currentSong]="identifiedSongList[6]"
     [previousSong]="identifiedSongList[4]"
   >
   </player>
-  <controls class="controls"></controls>
+  <list
+    class="player-list"
+    *ngIf="currentPlayerListView === playerListView.LIST_VIEW"
+    [identifiedSongList]="identifiedSongList"
+    [selectedSong]="6"></list>
+  <controls
+    class="controls"
+    (togglePlayerListView)="togglePlayerListView($event)">
+  </controls>
 </div>

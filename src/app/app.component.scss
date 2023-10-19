@@ -1,3 +1,5 @@
+@import "../assets/style-variables/song-list-variables";
+
 .app-container {
   background-color: #000;
   color: #fff;
@@ -18,17 +20,17 @@
 
 @media (orientation: landscape) {
   .app-container{
-    grid-template-columns: 1fr 10em;
+    grid-template-columns: 1fr $player-size-landscape;
     grid-template-areas:
-      "player controls";
+      "player-list controls";
   }
 }
 
 @media (orientation: portrait) {
   .app-container {
-    grid-template-rows: 1fr 7em;
+    grid-template-rows: 1fr $player-size-portrait;
     grid-template-areas:
-      "player"
+      "player-list"
       "controls";
   }
 }

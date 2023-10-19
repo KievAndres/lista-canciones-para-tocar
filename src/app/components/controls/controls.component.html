@@ -1,18 +1,33 @@
 <section class="controls">
-  <div class="list-view">
-    <i class="control-icons bx bx-list-ul"></i>
-  </div>
-  <div class="play-stop">
+  <div class="control-icons play-stop">
     <i
-      class="control-icons bx bx-play-circle"
+      class="bx bx-play-circle"
       *ngIf="isPlaying"
       (click)="changeIsPlaying(false)"
     >
     </i>
     <i
-      class="control-icons bx bx-stop-circle"
+      class="bx bx-stop-circle"
       *ngIf="!isPlaying"
       (click)="changeIsPlaying(true)"
     ></i>
+  </div>
+  <div class="control-icons secondary-buttons list-player">
+    <i
+      class='bx bx-list-ol'
+      *ngIf="currentPlayerListView === playerListView.PLAYER_VIEW"
+      (click)="emitTogglePlayerListView(playerListView.LIST_VIEW)">
+    </i>
+    <i
+      class='bx bxs-grid-alt'
+      *ngIf="currentPlayerListView === playerListView.LIST_VIEW"
+      (click)="emitTogglePlayerListView(playerListView.PLAYER_VIEW)">
+    </i>
+  </div>
+  <div class="control-icons secondary-buttons paste">
+    <i
+      class='bx bx-paste'
+      (click)="emitPasteEvent()"
+      ></i>
   </div>
 </section>

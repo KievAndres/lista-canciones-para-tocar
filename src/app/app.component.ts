@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { testPasteText } from './test';
 import { getSongList } from 'src/functions/get-song-list';
-import { NUEVA_ALABANZA, titleList } from 'src/constants/song-identifier.constant';
+import {
+  NUEVA_ALABANZA,
+  titleList,
+} from 'src/constants/song-identifier.constant';
 import { removeSpecialCharacters } from '../functions/remove-special-characters.function';
 import { removePunctuationMarks } from '../functions/remove-punctuation-marks.function';
 import { Song } from 'src/interfaces/song.interface';
 import { getCurrentSongTheme } from '../functions/get-current-song-theme';
+import { PlayerListView } from '../enum/player-list.enum';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +24,8 @@ export class AppComponent {
   public identifiedSongList: Song[];
   public songList: Song[];
   public selectedSong: number;
+  public playerListView: typeof PlayerListView;
+  public currentPlayerListView: PlayerListView;
 
   private readonly _timeInterval: number = 1000 * 60 * 6.5;
 
@@ -45,6 +51,8 @@ export class AppComponent {
     //   this._animateSelectedSong();
     // }
     this._identifyLineText();
+    this.playerListView = PlayerListView;
+    this.currentPlayerListView = PlayerListView.PLAYER_VIEW;
   }
 
   public async onPaste(): Promise<void> {
@@ -60,6 +68,10 @@ export class AppComponent {
       localStorage.setItem('selectedSong', JSON.stringify(this.selectedSong));
       this._animateSelectedSong();
     }
+  }
+
+  public togglePlayerListView(newPlayerListView: PlayerListView): void {
+    this.currentPlayerListView = newPlayerListView;
   }
 
   private _identifyLineText(): void {
@@ -152,6 +164,6 @@ export class AppComponent {
     this.identifiedSongList = this.identifiedSongList.map((song, index) => {
       song.theme = getCurrentSongTheme(index);
       return song;
-    })
+    });
   }
 }
