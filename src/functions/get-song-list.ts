@@ -14,7 +14,12 @@ export function getSongList(): Song[] {
     SAYA,
     SAYA_AFRO,
     ZAPATEO,
-    MORENADA
+    MORENADA,
+    NUEVA,
+    PHUNA,
+    MOSEÑADA,
+    MOXEÑADA,
+    CANCION
   } = Rythm;
   return [
     {
@@ -170,6 +175,34 @@ export function getSongList(): Song[] {
       rythm: [MORENADA],
       isCurrentlyPlaying: false,
       date: new Date('2023-01-01')
+    },
+    {
+      id: 'en-tu-aliento',
+      name: ['En tu aliento'],
+      rythm: [NUEVA, PHUNA],
+      isCurrentlyPlaying: false,
+      date: new Date('2023-10-20')
+    },
+    {
+      id: 'que-bueno-es',
+      name: ['Que bueno es'],
+      rythm: [MOSEÑADA, MOXEÑADA],
+      isCurrentlyPlaying: false,
+      date: new Date('2023-10-15')
+    },
+    {
+      id: 'gracias-padre',
+      name: ['Gracias Padre', 'Morenada 3'],
+      rythm: [MORENADA],
+      isCurrentlyPlaying: false,
+      date: new Date('2023-10-10')
+    },
+    {
+      id: 'miro-al-cielo',
+      name: ['Miro al cielo', 'Hebrea 3'],
+      rythm: [CANCION, HEBREA],
+      isCurrentlyPlaying: false,
+      date: new Date('2023-10-10')
     }
   ];
 }

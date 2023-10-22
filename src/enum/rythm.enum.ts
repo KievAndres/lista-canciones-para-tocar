@@ -10,5 +10,10 @@ export enum Rythm {
   SAYA = 'Saya',
   SAYA_AFRO = 'Saya Afro',
   ZAPATEO = 'Zapateo',
-  MORENADA = 'Morenada'
+  MORENADA = 'Morenada',
+  NUEVA = 'Nueva',
+  PHUNA = 'Phuna',
+  MOSEÑADA = 'Moseñada',
+  MOXEÑADA = 'Moxeñada',
+  CANCION = 'Cancion'
 }

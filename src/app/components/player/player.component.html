@@ -26,6 +26,12 @@
       >
         🎵 <span>{{ currentSong.rythm }}</span>
       </div>
+      <div
+        class="glass-container-new-song new-song"
+        *ngIf="isNewSong(currentSong)"
+        >
+        Nueva alabanza
+      </div>
     </div>
   </section>
   <section class="next-song-container">
