@@ -37,7 +37,7 @@ export class AppComponent {
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
-    this.pastedText = testPasteText;
+    // this.pastedText = testPasteText;
     // const identifiedSongListLocalStorage = JSON.parse(
     //   localStorage.getItem('identifiedSongList') ?? '""'
     // );
@@ -55,7 +55,7 @@ export class AppComponent {
     //   this.identifiedSongList = identifiedSongListLocalStorage;
     //   this._animateSelectedSong();
     // }
-    this._buildSongList();
+    // this._buildSongList();
     this.playerListView = PlayerListView;
     this.currentPlayerListView = PlayerListView.PLAYER_VIEW;
   }
