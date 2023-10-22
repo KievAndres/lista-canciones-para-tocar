@@ -24,7 +24,7 @@
         [style.background]="currentSong.theme?.rythmBackground"
         [style.color]="currentSong.theme?.rythmTextColor"
       >
-        🎵 <span>{{ currentSong.rythm }}</span>
+        🎵 <span>{{ currentSong.rythm[0] }}</span>
       </div>
       <div
         class="glass-container-new-song new-song"
@@ -34,7 +34,8 @@
       </div>
     </div>
   </section>
-  <section class="next-song-container blink-next-song">
+  <!-- <section class="next-song-container blink-next-song"> -->
+  <section class="next-song-container">
     <div class="new-song-flex-wrapper">
       <div class="new-song" *ngIf="isNewSong(nextSong)">
         Nueva alabanza
