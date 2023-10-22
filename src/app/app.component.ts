@@ -10,6 +10,7 @@ import { removePunctuationMarks } from '../functions/remove-punctuation-marks.fu
 import { Song } from 'src/interfaces/song.interface';
 import { getCurrentSongTheme } from '../functions/get-current-song-theme';
 import { PlayerListView } from '../enum/player-list.enum';
+import { updateCurrentPlayingSong } from 'src/functions/update-current-playing-song.function';
 
 @Component({
   selector: 'app-root',
@@ -90,6 +91,11 @@ export class AppComponent {
         }
       }
     });
+    // TODO remove
+  }
+
+  public goToSong(newSong: Song): void {
+    this.identifiedSongList = updateCurrentPlayingSong(this.identifiedSongList, newSong);
   }
 
   private _identifySongList(lineText: string): void {

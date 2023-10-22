@@ -5,6 +5,7 @@
       [ngClass]="{ 'song-item-selected': song.isCurrentlyPlaying }"
       [id]="'song-item-' + song.id"
       *ngFor="let song of songList"
+      (click)="emitGoToSong(song)"
     >
       <div class="song-item-title">{{ song.name[0] }}</div>
       <div class="song-item-alternative-title">

@@ -2,12 +2,14 @@
   <player
     class="player-list"
     *ngIf="currentPlayerListView === playerListView.PLAYER_VIEW"
-    [songList]="identifiedSongList">
+    [songList]="identifiedSongList"
+    (goToSong)="goToSong($event)">
   </player>
   <list
     class="player-list"
     *ngIf="currentPlayerListView === playerListView.LIST_VIEW"
-    [songList]="identifiedSongList">
+    [songList]="identifiedSongList"
+    (goToSong)="goToSong($event)">
   </list>
   <controls
     class="controls"
