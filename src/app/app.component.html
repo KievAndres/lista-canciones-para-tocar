@@ -13,6 +13,8 @@
   </list>
   <controls
     class="controls"
-    (togglePlayerListView)="togglePlayerListView($event)">
+    (togglePlayerListView)="togglePlayerListView($event)"
+    (playerStatus)="changePlayerStatus($event)"
+    (pasteEvent)="onPaste()">
   </controls>
 </div>

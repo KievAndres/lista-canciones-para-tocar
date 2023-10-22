@@ -10,7 +10,7 @@
       <div class="song-item-title">{{ song.name[0] }}</div>
       <div class="song-item-alternative-title">
         <span
-          [ngClass]="{ 'new-song': song.name[1] === NUEVA_ALABANZA }"
+          [ngClass]="{ 'new-song': isNewSong(song) }"
           >{{ song.name[1] }}</span
         >
       </div>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { PlayerListView } from '../../../enum/player-list.enum';
+import { PlayerStatus } from '../../../enum/player-status.enum';
 
 @Component({
   selector: 'controls',
@@ -9,19 +10,23 @@ import { PlayerListView } from '../../../enum/player-list.enum';
 export class ControlsComponent {
   @Output() togglePlayerListView = new EventEmitter<PlayerListView>();
   @Output() pasteEvent = new EventEmitter();
+  @Output() playerStatus = new EventEmitter<PlayerStatus>()
 
-  public isPlaying: boolean;
+  public playerStatusEnum: typeof PlayerStatus;
+  public currentPlayerStatus: PlayerStatus;
   public playerListView: typeof PlayerListView;
   public currentPlayerListView: PlayerListView;
 
   constructor() {
-    this.isPlaying = false;
+    this.playerStatusEnum = PlayerStatus;
+    this.currentPlayerStatus = PlayerStatus.STOP;
     this.playerListView = PlayerListView;
     this.currentPlayerListView = PlayerListView.PLAYER_VIEW;
   }
 
-  public changeIsPlaying(newIsPlaying: boolean): void {
-    this.isPlaying = newIsPlaying;
+  public changeIsPlaying(newPlayerStatus: PlayerStatus): void {
+    this.currentPlayerStatus = newPlayerStatus;
+    this.playerStatus.emit(newPlayerStatus);
   }
 
   public emitTogglePlayerListView(newPlayerListView: PlayerListView): void {

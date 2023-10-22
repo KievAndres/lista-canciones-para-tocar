@@ -17,4 +17,10 @@ export class ListComponent {
   public emitGoToSong(newSong: Song): void {
     this.goToSong.emit(newSong);
   }
+
+  public isNewSong(song: Song): boolean {
+    const currentDate = new Date();
+    const songDate = song.date;
+    return currentDate.getTime() - songDate.getTime() < 2629800000;
+  }
 }

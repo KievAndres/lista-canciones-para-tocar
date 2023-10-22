@@ -2,14 +2,14 @@
   <div class="control-icons play-stop">
     <i
       class="bx bx-play-circle"
-      *ngIf="isPlaying"
-      (click)="changeIsPlaying(false)"
+      *ngIf="currentPlayerStatus === playerStatusEnum.STOP"
+      (click)="changeIsPlaying(playerStatusEnum.PLAY)"
     >
     </i>
     <i
       class="bx bx-stop-circle"
-      *ngIf="!isPlaying"
-      (click)="changeIsPlaying(true)"
+      *ngIf="currentPlayerStatus === playerStatusEnum.PLAY"
+      (click)="changeIsPlaying(playerStatusEnum.STOP)"
     ></i>
   </div>
   <div class="control-icons secondary-buttons list-player">

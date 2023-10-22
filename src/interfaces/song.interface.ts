@@ -6,4 +6,5 @@ export interface Song {
   rythm: string[],
   theme?: SongTheme,
   isCurrentlyPlaying: boolean;
+  date: Date
 }

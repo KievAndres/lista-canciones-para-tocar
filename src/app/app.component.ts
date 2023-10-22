@@ -11,6 +11,7 @@ import { Song } from 'src/interfaces/song.interface';
 import { getCurrentSongTheme } from '../functions/get-current-song-theme';
 import { PlayerListView } from '../enum/player-list.enum';
 import { updateCurrentPlayingSong } from 'src/functions/update-current-playing-song.function';
+import { PlayerStatus } from '../enum/player-status.enum';
 
 @Component({
   selector: 'app-root',
@@ -24,24 +25,27 @@ export class AppComponent {
   public titleList: string;
   public identifiedSongList: Song[];
   public songList: Song[];
-  public selectedSong: number;
+  public currentPlayingSongIndex: number;
   public playerListView: typeof PlayerListView;
   public currentPlayerListView: PlayerListView;
 
+  private _animationSongListInterval?: any;
+
   private readonly _timeInterval: number = 1000 * 60 * 6.5;
+  private readonly _firstSongDelay: number = 2000 * 60;
 
   constructor() {
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
-    this.pastedText = testPasteText;
+    // this.pastedText = testPasteText;
     // const identifiedSongListLocalStorage = JSON.parse(
     //   localStorage.getItem('identifiedSongList') ?? '""'
     // );
     // const selectedSongLocalStorage = JSON.parse(
     //   localStorage.getItem('selectedSong') ?? '0'
     // );
+    this.currentPlayingSongIndex = 0;
     this.identifiedSongList = [];
-    this.selectedSong = 0;
     this.songList = getSongList();
     // if (selectedSongLocalStorage) {
     //   this.selectedSong = selectedSongLocalStorage;
@@ -51,7 +55,7 @@ export class AppComponent {
     //   this.identifiedSongList = identifiedSongListLocalStorage;
     //   this._animateSelectedSong();
     // }
-    this._identifyLineText();
+    // this._buildSongList();
     this.playerListView = PlayerListView;
     this.currentPlayerListView = PlayerListView.PLAYER_VIEW;
   }
@@ -59,23 +63,14 @@ export class AppComponent {
   public async onPaste(): Promise<void> {
     this.pastedText = await navigator.clipboard.readText();
     this.identifiedSongList = [];
-    this.selectedSong = 0;
-    this._identifyLineText();
-    if (this.identifiedSongList.length > 0) {
-      localStorage.setItem(
-        'identifiedSongList',
-        JSON.stringify(this.identifiedSongList)
-      );
-      localStorage.setItem('selectedSong', JSON.stringify(this.selectedSong));
-      this._animateSelectedSong();
-    }
+    this._buildSongList();
   }
 
   public togglePlayerListView(newPlayerListView: PlayerListView): void {
     this.currentPlayerListView = newPlayerListView;
   }
 
-  private _identifyLineText(): void {
+  private _buildSongList(): void {
     const lineTextList = this.pastedText.split('\n');
     lineTextList.forEach((lineText, index) => {
       if (index > 0) {
@@ -95,7 +90,30 @@ export class AppComponent {
   }
 
   public goToSong(newSong: Song): void {
-    this.identifiedSongList = updateCurrentPlayingSong(this.identifiedSongList, newSong);
+    this.identifiedSongList = this.identifiedSongList.map((song, index) => {
+      if (song.id === newSong.id) {
+        song.isCurrentlyPlaying = true;
+        this.currentPlayingSongIndex = index;
+      } else {
+        song.isCurrentlyPlaying = false;
+      }
+      return song;
+    });
+  }
+
+  public changePlayerStatus(newPlayerStatus: PlayerStatus): void {
+    if (newPlayerStatus === PlayerStatus.PLAY) {
+      if (this.currentPlayingSongIndex === 0) {
+        // firs song
+        setTimeout(() => {
+          this._animateSelectedSong();
+        }, this._firstSongDelay);
+      } else {
+        this._animateSelectedSong();
+      }
+    } else if (newPlayerStatus === PlayerStatus.STOP) {
+      clearInterval(this._animationSongListInterval);
+    }
   }
 
   private _identifySongList(lineText: string): void {
@@ -131,6 +149,10 @@ export class AppComponent {
     }
 
     this._buildSongThemes();
+    if (this.identifiedSongList[0]) {
+      // Select first song
+      this.identifiedSongList[0].isCurrentlyPlaying = true;
+    }
   }
 
   private _cleanText(text: string): string {
@@ -142,17 +164,25 @@ export class AppComponent {
   }
 
   private _animateSelectedSong(): void {
-    setInterval(() => {
-      if (this.selectedSong < this.identifiedSongList.length) {
-        this.selectedSong++;
-        localStorage.setItem('selectedSong', JSON.stringify(this.selectedSong));
-        this._goToSelectedSong();
-      }
+    this._animationSongListInterval = setInterval(() => {
+      this._automaticallyGoToNextSong()
     }, this._timeInterval);
   }
 
-  private _goToSelectedSong(): void {
-    document.getElementById(`song-item-${this.selectedSong}`)?.scrollIntoView();
+  private _automaticallyGoToNextSong(): void {
+    let nextSongIndex = -1;
+    this.identifiedSongList = this.identifiedSongList.map((song, index) => {
+      if (song.isCurrentlyPlaying) {
+        song.isCurrentlyPlaying = false;
+        nextSongIndex = index + 1;
+      } else if (nextSongIndex === index) {
+        song.isCurrentlyPlaying = true;
+        this.currentPlayingSongIndex = index;
+      } else {
+        song.isCurrentlyPlaying = false;
+      }
+      return song;
+    })
   }
 
   private _getTemporarySong(text: string): Song {
@@ -161,7 +191,8 @@ export class AppComponent {
       id: temporaryName,
       name: [text, NUEVA_ALABANZA],
       rythm: [],
-      isCurrentlyPlaying: false                                                                                                                                                                                                                                                                                             
+      isCurrentlyPlaying: false,
+      date: new Date()                                                                                                                                                                                                                                                                                        
     };
   }
 
