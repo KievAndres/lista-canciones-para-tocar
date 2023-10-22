@@ -8,9 +8,11 @@ import { SongTheme } from 'src/interfaces/song-theme.interface';
   styleUrls: ['player.component.scss']
 })
 export class PlayerComponent implements OnChanges {
-  @Input() public previousSong?: Song;
-  @Input() public currentSong!: Song;
-  @Input() public nextSong?: Song;
+  @Input() public songList: Song[] = [];
+
+  public previousSong?: Song;
+  public currentSong?: Song;
+  public nextSong?: Song;
 
   public songTheme?: SongTheme;
 

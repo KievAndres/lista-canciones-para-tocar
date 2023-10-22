@@ -2,18 +2,18 @@
   <div class="song-list">
     <div
       class="song-item"
-      [ngClass]="{ 'song-item-selected': selectedSong === i }"
-      [id]="'song-item-' + i"
-      *ngFor="let identifiedSong of identifiedSongList; index as i"
+      [ngClass]="{ 'song-item-selected': song.isCurrentlyPlaying }"
+      [id]="'song-item-' + song.id"
+      *ngFor="let song of songList"
     >
-      <div class="song-item-title">{{ identifiedSong.name[0] }}</div>
+      <div class="song-item-title">{{ song.name[0] }}</div>
       <div class="song-item-alternative-title">
         <span
-          [ngClass]="{ 'new-song': identifiedSong.name[1] === NUEVA_ALABANZA }"
-          >{{ identifiedSong.name[1] }}</span
+          [ngClass]="{ 'new-song': song.name[1] === NUEVA_ALABANZA }"
+          >{{ song.name[1] }}</span
         >
       </div>
-      <div class="song-item-rythm">{{ identifiedSong.rythm[0] }}</div>
+      <div class="song-item-rythm">{{ song.rythm[0] }}</div>
     </div>
   </div>
 </div>

@@ -150,9 +150,12 @@ export class AppComponent {
   }
 
   private _getTemporarySong(text: string): Song {
+    const temporaryName = text.toLowerCase().split(' ').join('-');
     return {
+      id: temporaryName,
       name: [text, NUEVA_ALABANZA],
       rythm: [],
+      isCurrentlyPlaying: false                                                                                                                                                                                                                                                                                             
     };
   }
 

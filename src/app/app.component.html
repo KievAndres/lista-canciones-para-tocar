@@ -1,33 +1,14 @@
-<!-- <div class="song-list-container">
-  <section class="song-list-header">
-    <span class="title-list">{{titleList}}</span>
-    <button class="paste-button" (click)="onPaste()">PEGAR</button>
-  </section>
-  <div class="song-list">
-    <div class="song-item" [ngClass]="{'song-item-selected': selectedSong === i}" [id]="'song-item-' + i" *ngFor="let identifiedSong of identifiedSongList; index as i">
-      <div class="song-item-title">{{identifiedSong.name[0]}}</div>
-      <div
-        class="song-item-alternative-title">
-        <span [ngClass]="{'new-song': identifiedSong.name[1] === NUEVA_ALABANZA}">{{identifiedSong.name[1]}}</span>
-      </div>
-      <div class="song-item-rythm">{{identifiedSong.rythm[0]}}</div>
-    </div>
-  </div>
-</div> -->
 <div class="app-container">
   <player
     class="player-list"
     *ngIf="currentPlayerListView === playerListView.PLAYER_VIEW"
-    [nextSong]="identifiedSongList[6]"
-    [currentSong]="identifiedSongList[6]"
-    [previousSong]="identifiedSongList[4]"
-  >
+    [songList]="identifiedSongList">
   </player>
   <list
     class="player-list"
     *ngIf="currentPlayerListView === playerListView.LIST_VIEW"
-    [identifiedSongList]="identifiedSongList"
-    [selectedSong]="6"></list>
+    [songList]="identifiedSongList">
+  </list>
   <controls
     class="controls"
     (togglePlayerListView)="togglePlayerListView($event)">

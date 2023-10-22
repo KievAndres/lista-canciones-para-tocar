@@ -8,8 +8,7 @@ import { Song } from 'src/interfaces/song.interface';
   styleUrls: ['list.component.scss'],
 })
 export class ListComponent {
-  @Input() public selectedSong: number = 0;
-  @Input() public identifiedSongList: Song[] = [];
+  @Input() public songList: Song[] = [];
 
   public readonly NUEVA_ALABANZA = NUEVA_ALABANZA;
 }
