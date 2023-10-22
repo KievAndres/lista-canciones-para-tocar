@@ -2,6 +2,7 @@
   height: 100%;
   width: 100%;
   display: grid;
+  grid-template-rows: 25% 50% 25%;
 
   .song {
     display: flex;
@@ -16,9 +17,33 @@
   }
 
   .next-song-container {
-    display: flex;
-    align-items: center;
-    justify-content: end;
+    display: grid;
+    grid-template-columns: 10em 1fr;
+
+    .new-song-flex-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+
+      .new-song {
+        background: rgb(238, 174, 202);
+        background: radial-gradient(
+          circle,
+          rgba(238, 174, 202, 1) 0%,
+          rgba(148, 187, 233, 1) 100%
+        );
+        color: #000;
+        padding: 0 0.4em;
+        border-radius: 0.3em;
+        font-weight: bold;
+      }
+    }
+
+    .next-song-flex-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+    }
   }
 
   .previous-next-song {

@@ -8,7 +8,7 @@ export const SONG_THEMES: SongTheme[] = [
     rythmTextColor: '#fff'
   },
   {
-    generalBackground: `linear-gradient(315deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)`,
+    generalBackground: `linear-gradient(315deg, rgb(116 222 150) 0%, rgb(81 176 219) 50%, rgb(252, 176, 69) 100%)`,
     generalTextColor: `#000`,
     rythmBackground: '#e71c8f',
     rythmTextColor: '#fff'

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NUEVA_ALABANZA } from 'src/constants/song-identifier.constant';
 import { Song } from 'src/interfaces/song.interface';
+import { isNewSong } from '../../../functions/is-new-song.function';
 
 @Component({
   selector: 'list',
@@ -13,14 +14,10 @@ export class ListComponent {
   @Output() public goToSong = new EventEmitter<Song>();
 
   public readonly NUEVA_ALABANZA = NUEVA_ALABANZA;
+  public readonly isNewSong = isNewSong;
+
 
   public emitGoToSong(newSong: Song): void {
     this.goToSong.emit(newSong);
-  }
-
-  public isNewSong(song: Song): boolean {
-    const currentDate = new Date();
-    const songDate = song.date;
-    return currentDate.getTime() - songDate.getTime() < 2629800000;
   }
 }
