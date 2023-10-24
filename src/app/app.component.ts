@@ -28,11 +28,13 @@ export class AppComponent {
   public currentPlayingSongIndex: number;
   public playerListView: typeof PlayerListView;
   public currentPlayerListView: PlayerListView;
+  public playerEnableBlinkNextSong: boolean;
 
   private _animationSongListInterval?: any;
+  private _elapsedTime: number;
 
-  private readonly _timeInterval: number = 1000 * 60 * 6.5;
-  private readonly _firstSongDelay: number = 2000 * 60;
+  private readonly _songDuration: number = 1000 * 60 * 6.5; // 6.5 minutes
+  private readonly _firstSongDelay: number = 2000 * 60; // 2 minutes
 
   constructor() {
     this.titleList = 'Músicas para hoy';
@@ -53,11 +55,12 @@ export class AppComponent {
     // }
     // if (identifiedSongListLocalStorage) {
     //   this.identifiedSongList = identifiedSongListLocalStorage;
-    //   this._animateSelectedSong();
     // }
     // this._buildSongList();
     this.playerListView = PlayerListView;
     this.currentPlayerListView = PlayerListView.PLAYER_VIEW;
+    this._elapsedTime = 0;
+    this.playerEnableBlinkNextSong = false;
   }
 
   public async onPaste(): Promise<void> {
@@ -94,6 +97,7 @@ export class AppComponent {
       if (song.id === newSong.id) {
         song.isCurrentlyPlaying = true;
         this.currentPlayingSongIndex = index;
+        this._elapsedTime = 0;
       } else {
         song.isCurrentlyPlaying = false;
       }
@@ -102,17 +106,13 @@ export class AppComponent {
   }
 
   public changePlayerStatus(newPlayerStatus: PlayerStatus): void {
-    if (newPlayerStatus === PlayerStatus.PLAY) {
-      if (this.currentPlayingSongIndex === 0) {
-        // firs song
-        setTimeout(() => {
-          this._animateSelectedSong();
-        }, this._firstSongDelay);
-      } else {
-        this._animateSelectedSong();
-      }
-    } else if (newPlayerStatus === PlayerStatus.STOP) {
-      clearInterval(this._animationSongListInterval);
+    switch(newPlayerStatus) {
+      case PlayerStatus.PLAY:
+        this._startPlayer();
+        break;
+      case PlayerStatus.STOP:
+        this._stopPlayer();
+        break;
     }
   }
 
@@ -163,10 +163,33 @@ export class AppComponent {
     return cleanText;
   }
 
-  private _animateSelectedSong(): void {
+  private _startPlayer(): void {
     this._animationSongListInterval = setInterval(() => {
-      this._automaticallyGoToNextSong()
-    }, this._timeInterval);
+      this._elapsedTime += 10;
+      this._checkIfGoToNextSong();
+    }, 10);
+  }
+
+  private _stopPlayer(): void {
+    this._elapsedTime = 0;
+    this.playerEnableBlinkNextSong = false;
+    clearInterval(this._animationSongListInterval);
+  }
+
+  private _checkIfGoToNextSong(): void {
+    let songDuration = this._songDuration;
+    if (this.currentPlayingSongIndex === 0) {
+      // First song
+      songDuration += this._firstSongDelay;
+    }
+    if (this._elapsedTime >= (songDuration - (songDuration / 4))) {
+      this.playerEnableBlinkNextSong = true;
+    }
+    if (this._elapsedTime > songDuration) {
+      this._elapsedTime = 0;
+      this.playerEnableBlinkNextSong = false;
+      this._automaticallyGoToNextSong();
+    }
   }
 
   private _automaticallyGoToNextSong(): void {
@@ -178,11 +201,15 @@ export class AppComponent {
       } else if (nextSongIndex === index) {
         song.isCurrentlyPlaying = true;
         this.currentPlayingSongIndex = index;
+        this._elapsedTime = 0;
       } else {
         song.isCurrentlyPlaying = false;
       }
       return song;
-    })
+    });
+    if (nextSongIndex >= this.identifiedSongList.length) {
+      this._stopPlayer();
+    }
   }
 
   private _getTemporarySong(text: string): Song {
@@ -192,7 +219,7 @@ export class AppComponent {
       name: [text, NUEVA_ALABANZA],
       rythm: [],
       isCurrentlyPlaying: false,
-      date: new Date()                                                                                                                                                                                                                                                                                        
+      date: new Date(),
     };
   }
 

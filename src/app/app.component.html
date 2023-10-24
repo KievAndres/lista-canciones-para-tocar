@@ -3,6 +3,7 @@
     class="player-list"
     *ngIf="currentPlayerListView === playerListView.PLAYER_VIEW"
     [songList]="identifiedSongList"
+    [enableBlinkNextSong]="playerEnableBlinkNextSong"
     (goToSong)="goToSong($event)">
   </player>
   <list

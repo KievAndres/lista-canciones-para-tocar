@@ -10,6 +10,7 @@ import { isNewSong } from '../../../functions/is-new-song.function';
 })
 export class PlayerComponent implements OnChanges {
   @Input() public songList: Song[] = [];
+  @Input() public enableBlinkNextSong: boolean = false;
 
   @Output() public goToSong = new EventEmitter<Song>();
 
