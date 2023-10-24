@@ -115,6 +115,8 @@
         font-weight: bold;
         text-align: center;
         line-height: 1em;
+        word-break: break-word;
+        text-wrap: balance;
       }
 
       &-alternative-title {
