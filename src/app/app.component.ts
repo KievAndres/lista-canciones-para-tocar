@@ -35,6 +35,7 @@ export class AppComponent {
 
   private readonly _songDuration: number = 1000 * 60 * 6.5; // 6.5 minutes
   private readonly _firstSongDelay: number = 2000 * 60; // 2 minutes
+  private readonly _timeToStartBlink: number = .5; // Half song
 
   constructor() {
     this.titleList = 'Músicas para hoy';
@@ -98,6 +99,7 @@ export class AppComponent {
         song.isCurrentlyPlaying = true;
         this.currentPlayingSongIndex = index;
         this._elapsedTime = 0;
+        this.playerEnableBlinkNextSong = false;
       } else {
         song.isCurrentlyPlaying = false;
       }
@@ -182,7 +184,7 @@ export class AppComponent {
       // First song
       songDuration += this._firstSongDelay;
     }
-    if (this._elapsedTime >= (songDuration - (songDuration / 4))) {
+    if (this._elapsedTime >= (songDuration * this._timeToStartBlink)) {
       this.playerEnableBlinkNextSong = true;
     }
     if (this._elapsedTime > songDuration) {
