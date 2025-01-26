@@ -1,13 +1,14 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
-import { isNewSong } from 'src/functions/is-new-song.function';
-import { Song } from 'src/interfaces/song.interface';
+import { Component, EventEmitter, Input, OnChanges, SimpleChanges, Output } from '@angular/core';
+import { Song } from '../../../../interfaces/song.interface';
+import { SongTheme } from 'src/interfaces/song-theme.interface';
+import { isNewSong } from '../../../../functions/is-new-song.function';
 
 @Component({
-  selector: 'player',
-  templateUrl: 'player.component.html',
-  styleUrls: ['player.component.scss'],
+  selector: 'player-default',
+  templateUrl: 'player-default.component.html',
+  styleUrls: ['player-default.component.scss']
 })
-export class PlayerComponent {
+export class PlayerDefaultComponent implements OnChanges {
   @Input() public songList: Song[] = [];
   @Input() public enableBlinkNextSong: boolean = false;
 
@@ -19,12 +20,11 @@ export class PlayerComponent {
 
   public readonly isNewSong = isNewSong;
 
+
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.songList?.currentValue) {
       const newSongList: Song[] = changes.songList.currentValue;
-      const currentSongIndex = newSongList
-        .map((song) => song.isCurrentlyPlaying)
-        .indexOf(true);
+      const currentSongIndex = newSongList.map(song => song.isCurrentlyPlaying).indexOf(true);
       if (currentSongIndex !== -1) {
         // Current song find
         this.currentSong = newSongList[currentSongIndex];

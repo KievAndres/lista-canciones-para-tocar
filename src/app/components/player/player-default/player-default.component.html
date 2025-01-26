@@ -1,0 +1,56 @@
+<div class="player-container">
+  <section class="previous-song-container">
+    <div
+      class="previous-next-song previous-song"
+      *ngIf="previousSong"
+      (click)="emitGoToSong(previousSong)">
+      <i class="previous-next-song-chevron bx bxs-chevrons-left"></i>
+      <span class="previous-next-song-title">{{ previousSong.name[0] }}</span>
+      <span class="previous-next-song-rythm">{{ previousSong.rythm[0] }}</span>
+    </div>
+  </section>
+  <section
+    class="song current-song"
+    [style.background]="currentSong?.theme?.generalBackground"
+    [style.color]="currentSong?.theme?.generalTextColor"
+  >
+    <div *ngIf="currentSong" class="glass-container">
+      <span class="glass-container-title">{{ currentSong.name[0] }}</span>
+      <span class="glass-container-alternative-title">{{
+        currentSong.name[1]
+      }}</span>
+      <div
+        class="glass-container-rythm"
+        [style.background]="currentSong.theme?.rythmBackground"
+        [style.color]="currentSong.theme?.rythmTextColor"
+      >
+        🎵 <span>{{ currentSong.rythm[0] }}</span>
+      </div>
+      <div
+        class="glass-container-new-song new-song"
+        *ngIf="isNewSong(currentSong)"
+        >
+        Nueva alabanza
+      </div>
+    </div>
+  </section>
+  <section
+    class="next-song-container"
+    [ngClass]="{'blink-next-song': enableBlinkNextSong}">
+    <div class="new-song-flex-wrapper">
+      <div class="new-song" *ngIf="isNewSong(nextSong)">
+        Nueva alabanza
+      </div>
+    </div>
+    <div class="next-song-flex-wrapper">
+      <div
+        class="previous-next-song next-song"
+        *ngIf="nextSong"
+        (click)="emitGoToSong(nextSong)">
+        <i class="previous-next-song-chevron bx bxs-chevrons-right"></i>
+        <span class="previous-next-song-title">{{ nextSong.name[0] }}</span>
+        <span class="previous-next-song-rythm">{{ nextSong.rythm[0] }}</span>
+      </div>
+    </div>
+  </section>
+</div>
