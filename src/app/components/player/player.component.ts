@@ -66,4 +66,15 @@ export class PlayerComponent {
   public emitGoToSong(newSong: Song): void {
     this.goToSong.emit(newSong);
   }
+
+  public togglePlayerView(): void {
+    switch (this.currentPlayerView) {
+      case PlayerView.DEFAULT:
+        this.currentPlayerView = PlayerView.LYRIC;
+        break;
+      case PlayerView.LYRIC:
+        this.currentPlayerView = PlayerView.DEFAULT;
+        break;
+    }
+  }
 }
