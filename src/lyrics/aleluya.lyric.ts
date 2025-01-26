@@ -1,4 +1,4 @@
-export const ALELUYA = `
+export const LYRIC_ALELUYA = `
   Aleluya, todo lo que respira te alabe
   Aleluya, que todos los cielos te alaben
   Aleluya, que todos tus hijos te alaben

@@ -1,5 +1,15 @@
 import { Rythm } from 'src/enum/rythm.enum';
 import { Song } from 'src/interfaces/song.interface';
+import { LYRIC_SURI } from '../lyrics/suri.lyric';
+import { LYRIC_MOXEÑADA_2 } from '../lyrics/moxeñada-2.lyric';
+import { LYRIC_CAPORAL } from '../lyrics/caporal.lyric';
+import { LYRIC_ALELUYA } from '../lyrics/aleluya.lyric';
+import { LYRIC_ERES_EL_UNICO } from '../lyrics/eres-el-unico-lyric';
+import { LYRIC_CUMBIA_ERES_LA_ESENCIA } from '../lyrics/cumbia-eres-la-esencia.lyric';
+import { LYRIC_MORENADA_PADRE_DE_GLORIA } from 'src/lyrics/morenada-padre-de-gloria.lyric';
+import { LYRIC_SAYA } from '../lyrics/saya.lyric';
+import { LYRIC_HEBREA_2 } from 'src/lyrics/hebrea-2.lyric';
+import { LYRIC_DIOS_MIO } from '../lyrics/dios-mio.lyric';
 
 export function getSongList(): Song[] {
   const {
@@ -60,7 +70,7 @@ export function getSongList(): Song[] {
       rythm: [SURI],
       isCurrentlyPlaying: false,
       date: new Date('2023-01-01'),
-      lyric: ''
+      lyric: LYRIC_SURI
     },
     {
       id: 'poderoso',
@@ -68,7 +78,7 @@ export function getSongList(): Song[] {
       rythm: [CAPORAL],
       isCurrentlyPlaying: false,
       date: new Date('2023-01-01'),
-      lyric: ''
+      lyric: LYRIC_CAPORAL
     },
     {
       id: 'eterno-es-tu-amor',
@@ -84,7 +94,7 @@ export function getSongList(): Song[] {
       rythm: [HUAYÑO],
       isCurrentlyPlaying: false,
       date: new Date('2023-01-01'),
-      lyric: ''
+      lyric: LYRIC_ALELUYA
     },
     {
       id: 'me aferro',
@@ -116,7 +126,7 @@ export function getSongList(): Song[] {
       rythm: [HEBREA],
       isCurrentlyPlaying: false,
       date: new Date('2023-01-01'),
-      lyric: ''
+      lyric: LYRIC_HEBREA_2
     },
     {
       id: 'tu-padre',
@@ -156,7 +166,7 @@ export function getSongList(): Song[] {
       rythm: [CUMBIA],
       isCurrentlyPlaying: false,
       date: new Date('2023-01-01'),
-      lyric: ''
+      lyric: LYRIC_CUMBIA_ERES_LA_ESENCIA
     },
     {
       id: 'en-ti-mi-dios',
@@ -229,6 +239,46 @@ export function getSongList(): Song[] {
       isCurrentlyPlaying: false,
       date: new Date('2023-10-10'),
       lyric: ''
-    }
+    },
+    {
+      id: 'moxenada-2',
+      name: ['Moxeñada 2'],
+      rythm: [MOSEÑADA, MOXEÑADA],
+      isCurrentlyPlaying: false,
+      date: new Date('2025-01-01'),
+      lyric: LYRIC_MOXEÑADA_2
+    },
+    {
+      id: 'eres-el-unico',
+      name: ['Eres el único'],
+      rythm: [HUAYÑO],
+      isCurrentlyPlaying: false,
+      date: new Date('2025-01-01'),
+      lyric: LYRIC_ERES_EL_UNICO
+    },
+    {
+      id: 'padre de gloria',
+      name: ['Padre de gloria', 'Morenada 4'],
+      rythm: [MORENADA],
+      isCurrentlyPlaying: false,
+      date: new Date('2025-01-01'),
+      lyric: LYRIC_MORENADA_PADRE_DE_GLORIA
+    },
+    {
+      id: 'solo-tu-eres-digo',
+      name: ['Solo tu eres digno', 'Saya'],
+      rythm: [SAYA_AFRO, SAYA],
+      isCurrentlyPlaying: false,
+      date: new Date('2025-01-01'),
+      lyric: LYRIC_SAYA
+    },
+    {
+      id: 'dios-mio',
+      name: ['Dios mío', 'Hebrea 4'],
+      rythm: [HEBREA],
+      isCurrentlyPlaying: false,
+      date: new Date('2025-01-01'),
+      lyric: LYRIC_DIOS_MIO 
+    },
   ];
 }
