@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
-import { isNewSong } from 'src/functions/is-new-song.function';
 import { Song } from 'src/interfaces/song.interface';
 
 @Component({
@@ -16,8 +15,6 @@ export class PlayerComponent {
   public previousSong?: Song;
   public currentSong?: Song;
   public nextSong?: Song;
-
-  public readonly isNewSong = isNewSong;
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.songList?.currentValue) {
