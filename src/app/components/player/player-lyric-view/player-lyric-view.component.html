@@ -1,0 +1,11 @@
+<section class="player-lyric-view-container">
+  <ng-container *ngIf="currentSong?.lyric; else no_lyric">
+    <section>
+      {{ currentSong?.lyric }}
+    </section>
+  </ng-container>
+  <ng-template #no_lyric
+    ><section class="no-lyric">
+      <i class="no-lyric-icon bx bx-microphone-off"></i></section
+  ></ng-template>
+</section>

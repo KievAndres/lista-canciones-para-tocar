@@ -7,6 +7,8 @@
       [nextSong]="nextSong"
       [enableBlinkNextSong]="enableBlinkNextSong"
     ></player-default-view>
+    <player-lyric-view
+      *ngSwitchCase="playerView.LYRIC"></player-lyric-view>
   </ng-container>
   <button class="player-view-button" (click)="togglePlayerView()">
     <ng-container [ngSwitch]="currentPlayerView">
