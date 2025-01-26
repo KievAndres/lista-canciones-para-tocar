@@ -27,7 +27,7 @@ export class PlayerComponent {
   public readonly playerView = PlayerView;
 
   constructor() {
-    this.currentPlayerView = PlayerView.LYRIC;
+    this.currentPlayerView = PlayerView.DEFAULT;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
