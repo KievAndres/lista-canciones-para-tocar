@@ -12,6 +12,7 @@ import { getCurrentSongTheme } from '../functions/get-current-song-theme';
 import { PlayerListView } from '../enum/player-list.enum';
 import { updateCurrentPlayingSong } from 'src/functions/update-current-playing-song.function';
 import { PlayerStatus } from '../enum/player-status.enum';
+import { PLAYLIST_20250126 } from 'src/playlists/playlist-20250126.constant';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +36,7 @@ export class AppComponent {
 
   private readonly _songDuration: number = 1000 * 60 * 6.5; // 6.5 minutes
   private readonly _firstSongDelay: number = 2000 * 60; // 2 minutes
-  private readonly _timeToStartBlink: number = .5; // Half song
+  private readonly _timeToStartBlink: number = 0.5; // Half song
 
   constructor() {
     this.titleList = 'Músicas para hoy';
@@ -58,6 +59,7 @@ export class AppComponent {
     //   this.identifiedSongList = identifiedSongListLocalStorage;
     // }
     // this._buildSongList();
+    this._buildSongListBasedOnSavedSongIdList(PLAYLIST_20250126);
     this.playerListView = PlayerListView;
     this.currentPlayerListView = PlayerListView.PLAYER_VIEW;
     this._elapsedTime = 0;
@@ -108,7 +110,7 @@ export class AppComponent {
   }
 
   public changePlayerStatus(newPlayerStatus: PlayerStatus): void {
-    switch(newPlayerStatus) {
+    switch (newPlayerStatus) {
       case PlayerStatus.PLAY:
         this._startPlayer();
         break;
@@ -184,7 +186,7 @@ export class AppComponent {
       // First song
       songDuration += this._firstSongDelay;
     }
-    if (this._elapsedTime >= (songDuration * this._timeToStartBlink)) {
+    if (this._elapsedTime >= songDuration * this._timeToStartBlink) {
       this.playerEnableBlinkNextSong = true;
     }
     if (this._elapsedTime > songDuration) {
@@ -222,7 +224,7 @@ export class AppComponent {
       rythm: [],
       isCurrentlyPlaying: false,
       date: new Date(),
-      lyric: ''
+      lyric: '',
     };
   }
 
@@ -235,5 +237,20 @@ export class AppComponent {
       song.theme = getCurrentSongTheme(index);
       return song;
     });
+  }
+
+  private _buildSongListBasedOnSavedSongIdList(
+    savedSongIdList: string[]
+  ): void {
+    savedSongIdList.forEach((savedSongId) => {
+      const foundSong = this.songList.find((song) => song.id === savedSongId);
+      if (foundSong) {
+        this.identifiedSongList.push(foundSong);
+      }
+    });
+    if (this.identifiedSongList[0]) {
+      // Select first song
+      this.identifiedSongList[0].isCurrentlyPlaying = true;
+    }
   }
 }
