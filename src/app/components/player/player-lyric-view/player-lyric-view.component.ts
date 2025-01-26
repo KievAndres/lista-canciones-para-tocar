@@ -14,13 +14,26 @@ export class PlayerLyricViewComponent {
     }
   }
 
-  public lyricBlocks: string[];
+  public lyricBlocks: string[][];
+  private _lyricLines: string[];
 
   constructor() {
     this.lyricBlocks = [];
+    this._lyricLines = [];
   }
 
   private _buildLyricBlocks(lyric: string): void {
-    this.lyricBlocks = lyric.split('\n');
+    this._lyricLines = lyric.split('\n');
+    let accumulator: string[] = [];
+    this._lyricLines.forEach(lyricLine => {
+      if (!lyricLine) {
+        if (accumulator.length > 0) {
+          this.lyricBlocks.push(accumulator);
+          accumulator = [];
+        }
+      } else {
+        accumulator.push(lyricLine);
+      }
+    })
   }
 }

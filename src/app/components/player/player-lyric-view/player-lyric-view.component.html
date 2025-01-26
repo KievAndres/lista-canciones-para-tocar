@@ -2,7 +2,11 @@
   <ng-container *ngIf="lyricBlocks.length > 0; else no_lyric">
     <section class="lyric-block-container">
       <ng-container *ngFor="let lyricBlockItem of lyricBlocks">
-        <p class="lyric-block">{{lyricBlockItem}}</p>
+        <p class="lyric-block">
+          <ng-container *ngFor="let lyricLine of lyricBlockItem">
+            <span class="lyric-line">{{lyricLine}}</span>
+          </ng-container>
+        </p>
       </ng-container>
     </section>
   </ng-container>
