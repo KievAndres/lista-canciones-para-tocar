@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { PlayerView } from 'src/enum/player-view.enum';
 import { Song } from 'src/interfaces/song.interface';
 
 @Component({
@@ -15,6 +22,13 @@ export class PlayerComponent {
   public previousSong?: Song;
   public currentSong?: Song;
   public nextSong?: Song;
+  public currentPlayerView: PlayerView;
+
+  public readonly playerView = PlayerView;
+
+  constructor() {
+    this.currentPlayerView = PlayerView.DEFAULT;
+  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.songList?.currentValue) {

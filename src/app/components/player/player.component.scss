@@ -1,0 +1,34 @@
+.player-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  .player-view-button {
+    position: absolute;
+    bottom: 3em;
+    left: .2em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    height: 20%;
+    bottom: 1em;
+    aspect-ratio: 1 / 1;
+    left: 0;
+
+    &-icon {
+      font-size: 3em;
+    }
+  }
+
+  @media (orientation: portrait) {
+    .player-view-button {
+      height: 15%;
+      bottom: unset;
+      left: unset;
+      top: 1em;
+      right: 1em;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<section class="player-container">
+  <ng-container [ngSwitch]="currentPlayerView">
+    <player-default-view
+      *ngSwitchCase="playerView.DEFAULT"
+      [previousSong]="previousSong"
+      [currentSong]="currentSong"
+      [nextSong]="nextSong"
+      [enableBlinkNextSong]="enableBlinkNextSong"
+    ></player-default-view>
+  </ng-container>
+  <button class="player-view-button"><i class="player-view-button-icon bx bx-user-voice"></i></button>
+</section>
