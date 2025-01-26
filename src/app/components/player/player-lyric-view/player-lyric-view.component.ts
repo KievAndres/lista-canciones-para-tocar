@@ -7,5 +7,20 @@ import { Song } from "src/interfaces/song.interface";
   styleUrls: ['./player-lyric-view.component.scss']
 })
 export class PlayerLyricViewComponent {
-  @Input() public currentSong?: Song;
+  @Input() public set currentSong(song: Song | undefined) {
+    if (song?.lyric) {
+      const newLyric: string = song?.lyric;
+      this._buildLyricBlocks(newLyric);
+    }
+  }
+
+  public lyricBlocks: string[];
+
+  constructor() {
+    this.lyricBlocks = [];
+  }
+
+  private _buildLyricBlocks(lyric: string): void {
+    this.lyricBlocks = lyric.split('\n');
+  }
 }

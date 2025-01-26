@@ -2,6 +2,25 @@
   height: 100%;
   width: 100%;
 
+  .lyric-block-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+    font-size: 2em;
+
+    .lyric-block {
+      margin: 0;
+      padding: 0;
+
+      &:empty {
+        height: 2em;
+      }
+    }
+  }
+
   .no-lyric {
     height: 100%;
     width: 100%;
@@ -11,6 +30,12 @@
 
     &-icon {
       font-size: 10em;
+    }
+  }
+
+  @media (orientation: portrait) {
+    .lyric-block-container {
+      height: calc(100vh - 9em - 10px);
     }
   }
 }
