@@ -218,10 +218,11 @@ export class AppComponent {
     const temporaryName = text.toLowerCase().split(' ').join('-');
     return {
       id: temporaryName,
-      name: [text, NUEVA_ALABANZA],
+      name: [text],
       rythm: [],
       isCurrentlyPlaying: false,
       date: new Date(),
+      lyric: ''
     };
   }
 

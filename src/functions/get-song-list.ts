@@ -257,7 +257,7 @@ export function getSongList(): Song[] {
       lyric: LYRIC_ERES_EL_UNICO
     },
     {
-      id: 'padre de gloria',
+      id: 'padre-de-gloria',
       name: ['Padre de gloria', 'Morenada 4'],
       rythm: [MORENADA],
       isCurrentlyPlaying: false,
@@ -265,7 +265,7 @@ export function getSongList(): Song[] {
       lyric: LYRIC_MORENADA_PADRE_DE_GLORIA
     },
     {
-      id: 'solo-tu-eres-digo',
+      id: 'solo-tu-eres-digno',
       name: ['Solo tu eres digno', 'Saya'],
       rythm: [SAYA_AFRO, SAYA],
       isCurrentlyPlaying: false,
