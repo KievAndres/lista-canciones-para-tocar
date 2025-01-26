@@ -7,11 +7,10 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-self: center;
     flex-direction: column;
     overflow: auto;
-    font-size: 2em;
-    gap: 2em;
+    font-size: 1.5em;
+    gap: 1.2em;
 
     .lyric-block {
       margin: 0;

@@ -13,16 +13,4 @@
       [currentSong]="currentSong"
     ></player-lyric-view>
   </ng-container>
-  <button class="player-view-button" (click)="togglePlayerView()">
-    <ng-container [ngSwitch]="currentPlayerView">
-      <i
-        *ngSwitchCase="playerView.DEFAULT"
-        class="player-view-button-icon bx bx-user-voice"
-      ></i>
-      <i
-        *ngSwitchCase="playerView.LYRIC"
-        class="player-view-button-icon bx bx-music"
-      ></i>
-    </ng-container>
-  </button>
 </section>

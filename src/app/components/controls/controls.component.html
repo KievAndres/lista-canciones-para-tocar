@@ -13,7 +13,7 @@
     ></i>
   </div>
   <div class="control-icons secondary-buttons list-player">
-    <i
+    <!-- <i
       class='bx bx-list-ol'
       *ngIf="currentPlayerListView === playerListView.PLAYER_VIEW"
       (click)="emitTogglePlayerListView(playerListView.LIST_VIEW)">
@@ -22,6 +22,16 @@
       class='bx bxs-grid-alt'
       *ngIf="currentPlayerListView === playerListView.LIST_VIEW"
       (click)="emitTogglePlayerListView(playerListView.PLAYER_VIEW)">
+    </i> -->
+    <i
+      class='bx bxs-grid-alt'
+      *ngIf="isEnabledLyricMode"
+      (click)="emitToggleLyricMode(false)">
+    </i>
+    <i
+      class='bx bx-user-voice'
+      *ngIf="!isEnabledLyricMode"
+      (click)="emitToggleLyricMode(true)">
     </i>
   </div>
   <div class="control-icons secondary-buttons paste">

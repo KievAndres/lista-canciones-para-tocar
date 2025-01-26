@@ -4,6 +4,7 @@
     *ngIf="currentPlayerListView === playerListView.PLAYER_VIEW"
     [songList]="identifiedSongList"
     [enableBlinkNextSong]="playerEnableBlinkNextSong"
+    [isEnabledLyricMode]="isEnabledLyricMode"
     (goToSong)="goToSong($event)">
   </player>
   <list
@@ -16,6 +17,7 @@
     class="controls"
     (togglePlayerListView)="togglePlayerListView($event)"
     (playerStatus)="changePlayerStatus($event)"
-    (pasteEvent)="onPaste()">
+    (pasteEvent)="onPaste()"
+    (enableLyricMode)="toggleIsEnabledLyricMode($event)">
   </controls>
 </div>

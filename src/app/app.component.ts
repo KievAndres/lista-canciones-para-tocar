@@ -30,6 +30,7 @@ export class AppComponent {
   public playerListView: typeof PlayerListView;
   public currentPlayerListView: PlayerListView;
   public playerEnableBlinkNextSong: boolean;
+  public isEnabledLyricMode: boolean;
 
   private _animationSongListInterval?: any;
   private _elapsedTime: number;
@@ -39,6 +40,7 @@ export class AppComponent {
   private readonly _timeToStartBlink: number = 0.5; // Half song
 
   constructor() {
+    this.isEnabledLyricMode = false;
     this.titleList = 'Músicas para hoy';
     this.pastedText = '';
     // this.pastedText = testPasteText;
@@ -118,6 +120,10 @@ export class AppComponent {
         this._stopPlayer();
         break;
     }
+  }
+
+  public toggleIsEnabledLyricMode(newValue: boolean): void {
+    this.isEnabledLyricMode = newValue;
   }
 
   private _identifySongList(lineText: string): void {

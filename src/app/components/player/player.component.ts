@@ -16,6 +16,9 @@ import { Song } from 'src/interfaces/song.interface';
 export class PlayerComponent {
   @Input() public songList: Song[] = [];
   @Input() public enableBlinkNextSong: boolean = false;
+  @Input() public set isEnabledLyricMode(isEnabledLyricMode: boolean) {
+    this.currentPlayerView = isEnabledLyricMode ? PlayerView.LYRIC : PlayerView.DEFAULT;
+  };
 
   @Output() public goToSong = new EventEmitter<Song>();
 
@@ -65,16 +68,5 @@ export class PlayerComponent {
 
   public emitGoToSong(newSong: Song): void {
     this.goToSong.emit(newSong);
-  }
-
-  public togglePlayerView(): void {
-    switch (this.currentPlayerView) {
-      case PlayerView.DEFAULT:
-        this.currentPlayerView = PlayerView.LYRIC;
-        break;
-      case PlayerView.LYRIC:
-        this.currentPlayerView = PlayerView.DEFAULT;
-        break;
-    }
   }
 }
