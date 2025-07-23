@@ -9,7 +9,7 @@ import { Song } from 'src/interfaces/song.interface';
 import { getCurrentSongTheme } from '../functions/get-current-song-theme';
 import { PlayerListView } from '../enum/player-list.enum';
 import { PlayerStatus } from '../enum/player-status.enum';
-import { PLAYLIST_20250129 } from 'src/playlists/playlist-20250129.constant';
+import { PLAYLIST_20250723 } from 'src/playlists/playlist-20250723.constant';
 
 @Component({
   selector: 'app-root',
@@ -58,7 +58,7 @@ export class AppComponent {
     //   this.identifiedSongList = identifiedSongListLocalStorage;
     // }
     // this._buildSongList();
-    this._buildSongListBasedOnSavedSongIdList(PLAYLIST_20250129);
+    this._buildSongListBasedOnSavedSongIdList(PLAYLIST_20250723);
     this.playerListView = PlayerListView;
     this.currentPlayerListView = PlayerListView.PLAYER_VIEW;
     this._elapsedTime = 0;
